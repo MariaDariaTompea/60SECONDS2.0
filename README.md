@@ -16,7 +16,7 @@ An evolutionary successor to the classic atomic survival genre, focusing on narr
 
 For the full technical implementation plan, architectural flowcharts, and detailed narrative blueprints, please check the following files in this repository:
 
-- **[Full Documentation & Plan (PDF)](./60Seconds2.0_DocumentationAndPlan.pdf)**: The primary formatted technical thesis.
+- **[Full Documentation & Plan (PDF)](./60Seconds2_0DocumentationAndPlan.pdf)**: The primary formatted technical thesis.
 
 ## Project Roadmap
 - **2026-2027:** Official development cycle and release of the First Demo.
