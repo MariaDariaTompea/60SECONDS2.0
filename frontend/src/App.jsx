@@ -8,119 +8,404 @@ const ShipView = ({ difficulty, onExit }) => {
   const [supplies, setSupplies] = useState({ food: 5, water: 8, rum: 3, wood: 4 });
   const [seaCurse, setSeaCurse] = useState(0);
   const [log, setLog] = useState(["Day 1: The crew is anxious, but the ship holds steady. The Royal Guard is far behind us... for now."]);
+  const [activeView, setActiveView] = useState(null); // 'map', 'notebook', 'occult'
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [displayDay, setDisplayDay] = useState(1);
+
+  const handleNextDay = () => {
+    const next = day + 1;
+    setDisplayDay(day); // Show current day first
+    setActiveView(null);
+    setIsTransitioning(true);
+    
+    // Sequence: Show current -> Change to next -> Fade out
+    setTimeout(() => {
+      setDisplayDay(next); // Transform to next day
+      setDay(next); // Update background state
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 1000);
+    }, 1200);
+  };
 
   const stats = [
-    { label: 'FOOD', value: supplies.food, icon: <Coffee size={16} />, color: '#ff9d00' },
-    { label: 'WATER', value: supplies.water, icon: <Droplets size={16} />, color: '#00e5ff' },
-    { label: 'RUM', value: supplies.rum, icon: <Wind size={16} />, color: '#a060ff' },
-    { label: 'WOOD', value: supplies.wood, icon: <Anchor size={16} />, color: '#704010' },
+    { label: 'FOOD', value: supplies.food, icon: <Coffee size={18} />, color: '#ff9d00' },
+    { label: 'WATER', value: supplies.water, icon: <Droplets size={18} />, color: '#00e5ff' },
+    { label: 'RUM', value: supplies.rum, icon: <Wind size={18} />, color: '#a060ff' },
+    { label: 'WOOD', value: supplies.wood, icon: <Anchor size={18} />, color: '#704010' },
   ];
+
+  const crew = [
+    { role: 'CAPTAIN', status: 'HEALTHY', health: 100 },
+    { role: 'NAVIGATOR', status: 'HEALTHY', health: 100 },
+    { role: 'GUNNER', status: 'HEALTHY', health: 100 },
+    { role: 'COOK', status: 'HEALTHY', health: 100 },
+  ];
+
+  const getCurseColor = (val) => {
+    if (val < 25) return '#4ade80';
+    if (val < 50) return '#facc15';
+    if (val < 75) return '#fb923c';
+    return '#ff3e3e';
+  };
 
   return (
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="ship-container"
+      className="ship-view-container"
       style={{ 
         width: '100vw', 
         height: '100vh', 
-        background: 'linear-gradient(to bottom, #001a33, #000810)',
+        background: `white url('/ship_sketch.png')`,
+        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         display: 'flex',
         flexDirection: 'column',
-        padding: '30px'
+        padding: '20px 20px 0 20px',
+        position: 'relative',
+        overflow: 'hidden'
       }}
     >
+      {/* Day Transition Overlay */}
+      <AnimatePresence>
+        {isTransitioning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{ 
+              position: 'absolute', 
+              inset: 0, 
+              background: 'black', 
+              zIndex: 1000, 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center' 
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{ textAlign: 'center' }}
+            >
+              <motion.h2 
+                initial={{ letterSpacing: '20px', opacity: 0 }}
+                animate={{ letterSpacing: '5px', opacity: 0.5 }}
+                style={{ fontSize: '1rem', color: 'var(--text-dim)', marginBottom: '10px' }}
+              >
+                SURVIVAL
+              </motion.h2>
+              <motion.h1 
+                key={displayDay}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                style={{ fontSize: '5rem', fontWeight: 900, letterSpacing: '15px', background: 'linear-gradient(to bottom, #fff, #666)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+              >
+                DAY {displayDay}
+              </motion.h1>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* HUD Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
-        <div className="glass-panel" style={{ padding: '15px 30px', display: 'flex', gap: '40px' }}>
-          {stats.map(stat => (
-            <div key={stat.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{ color: stat.color }}>{stat.icon}</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>{stat.label}</div>
-              <div style={{ fontWeight: 800, fontSize: '1.2rem' }}>{stat.value}</div>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-start', zIndex: 10 }}>
+        <div className="glass-panel" style={{ padding: '10px 30px', textAlign: 'center', minWidth: '120px' }}>
+          <div style={{ fontSize: '0.6rem', color: 'var(--text-dim)', letterSpacing: '1px' }}>JOURNEY DAY</div>
+          <div style={{ fontSize: '1.8rem', fontWeight: 900 }}>{day}</div>
+        </div>
+      </div>
+
+
+
+      {/* Interaction Zones (Hotspots) - Now Full Screen to match background */}
+      <div className="ship-interaction-zones" style={{ 
+        position: 'absolute', 
+        inset: 0, 
+        pointerEvents: 'none',
+        zIndex: 4 
+      }}>
+        {/* Centered Line of Chairs (Matched to Sketch) */}
+        <div style={{ 
+          position: 'absolute', 
+          bottom: '35%', 
+          left: '50%', 
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          gap: '20px',
+          pointerEvents: 'none'
+        }}>
+          {[1, 2, 3, 4].map(i => (
+            <div key={i} style={{ 
+              width: '90px', 
+              height: '130px', 
+              border: '1px dashed rgba(0,0,0,0.1)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+              fontSize: '0.45rem',
+              color: 'rgba(0,0,0,0.4)',
+              paddingTop: '15px'
+            }}>
+              <div style={{ width: '45px', height: '45px', borderRadius: '50%', border: '1px solid rgba(0,0,0,0.1)', marginBottom: '10px' }}></div>
+              CHAIR {i}
             </div>
           ))}
         </div>
 
-        <div className="glass-panel" style={{ padding: '15px 30px', textAlign: 'center', border: '1px solid #ff3e3e' }}>
-          <div style={{ fontSize: '0.7rem', color: '#ff3e3e', letterSpacing: '2px' }}>SEA CURSE</div>
-          <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#ff3e3e' }}>{seaCurse}%</div>
-        </div>
-
-        <div className="glass-panel" style={{ padding: '15px 30px' }}>
-          <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>JOURNEY DAY</div>
-          <div style={{ fontSize: '1.5rem', fontWeight: 900, textAlign: 'center' }}>{day}</div>
-        </div>
       </div>
 
-      {/* Main Gameplay Area */}
-      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '350px 1fr 350px', gap: '30px' }}>
+      {/* Main Gameplay Area (Sidebars Only) */}
+      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '320px 1fr 320px', gap: '20px', marginTop: '20px', zIndex: 10, pointerEvents: 'none' }}>
         {/* Left: Crew Status */}
-        <div className="glass-panel" style={{ padding: '20px' }}>
-          <h3 style={{ fontSize: '0.9rem', letterSpacing: '2px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '15px', pointerEvents: 'auto' }}>
+          <h3 style={{ fontSize: '0.8rem', letterSpacing: '2px', marginBottom: '10px', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-dim)' }}>
             <Users size={16} /> THE CREW
           </h3>
-          {['CAPTAIN', 'NAVIGATOR', 'GUNNER', 'COOK'].map(role => (
-            <div key={role} className="glass-panel" style={{ padding: '15px', marginBottom: '10px', background: 'rgba(255,255,255,0.02)' }}>
-              <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>{role}</div>
-              <div style={{ fontWeight: 600 }}>STATUS: HEALTHY</div>
-              <div style={{ height: '4px', background: '#333', marginTop: '8px', borderRadius: '2px' }}>
-                <div style={{ width: '100%', height: '100%', background: '#4ade80', borderRadius: '2px' }} />
+          {crew.map(member => (
+            <div key={member.role} className="glass-panel" style={{ padding: '15px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)' }}>
+              <div style={{ fontSize: '0.6rem', color: 'var(--text-dim)', marginBottom: '5px' }}>{member.role}</div>
+              <div style={{ fontWeight: 800, fontSize: '0.9rem', marginBottom: '10px' }}>STATUS: {member.status}</div>
+              <div style={{ height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', overflow: 'hidden' }}>
+                <motion.div 
+                  initial={{ width: 0 }}
+                  animate={{ width: `${member.health}%` }}
+                  style={{ height: '100%', background: '#4ade80' }} 
+                />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Center: Ship Visualization (Placeholder for Three.js/Assets) */}
-        <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ textAlign: 'center', opacity: 0.5 }}>
-            <Anchor size={120} strokeWidth={1} style={{ marginBottom: '20px' }} />
-            <div style={{ letterSpacing: '5px' }}>H.M.S. SURVIVAL</div>
-          </div>
-          
-          <div style={{ position: 'absolute', bottom: '20px', display: 'flex', gap: '20px' }}>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="glass-panel"
-              style={{ padding: '15px 40px', background: 'rgba(255, 62, 62, 0.2)', border: '1px solid #ff3e3e', color: 'white', fontWeight: 800, cursor: 'pointer' }}
-              onClick={() => setDay(d => d + 1)}
-            >
-              NEXT DAY
-            </motion.button>
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="glass-panel"
-              style={{ padding: '15px 40px', cursor: 'pointer' }}
-              onClick={onExit}
-            >
-              ABANDON SHIP
-            </motion.button>
-          </div>
-        </div>
+        {/* Center Space */}
+        <div style={{ pointerEvents: 'none' }}></div>
 
-        {/* Right: Log & Map */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
-          <div className="glass-panel" style={{ flex: 1, padding: '20px', display: 'flex', flexDirection: 'column' }}>
-            <h3 style={{ fontSize: '0.9rem', letterSpacing: '2px', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+        {/* Right: Log & Nav */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', pointerEvents: 'auto' }}>
+          <motion.div 
+            whileHover={{ x: -5 }}
+            onClick={() => setActiveView('notebook')}
+            className="glass-panel" 
+            style={{ flex: 1, padding: '20px', display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
+          >
+            <h3 style={{ fontSize: '0.8rem', letterSpacing: '2px', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <BookOpen size={16} /> CAPTAIN'S LOG
             </h3>
             <div style={{ flex: 1, overflowY: 'auto', fontSize: '0.85rem', color: 'var(--text-dim)', lineHeight: '1.6' }}>
               {log.map((entry, i) => <p key={i} style={{ marginBottom: '15px' }}>{entry}</p>)}
             </div>
-          </div>
+          </motion.div>
           
-          <div className="glass-panel" style={{ height: '250px', padding: '20px', background: 'rgba(0, 229, 255, 0.05)', border: '1px solid rgba(0, 229, 255, 0.2)' }}>
-            <h3 style={{ fontSize: '0.8rem', letterSpacing: '2px', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <motion.div 
+            whileHover={{ x: -5 }}
+            onClick={() => setActiveView('map')}
+            className="glass-panel" 
+            style={{ height: '220px', padding: '20px', background: 'rgba(0, 229, 255, 0.05)', border: '1px solid rgba(0, 229, 255, 0.2)', cursor: 'pointer' }}
+          >
+            <h3 style={{ fontSize: '0.7rem', letterSpacing: '2px', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
               <MapIcon size={14} /> ARCHIPELAGO NAV
             </h3>
-            <div style={{ width: '100%', height: '140px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontSize: '0.7rem', opacity: 0.3 }}>[ MAP LOADING ]</span>
+            <div style={{ width: '100%', height: '120px', background: 'rgba(0,0,0,0.3)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px dashed rgba(0, 229, 255, 0.2)' }}>
+              <span style={{ fontSize: '0.6rem', opacity: 0.5 }}>[ MAP CLICK TO EXPAND ]</span>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
+
+      {/* Occult Table Hotspot (Global Layer) */}
+      <motion.div 
+        initial={{ x: '-50%', y: 0 }}
+        animate={{ x: '-50%', y: 0 }}
+        whileHover={{ scale: 1.02, backgroundColor: 'rgba(0,0,0,0.02)' }}
+        onClick={() => setActiveView('occult')}
+        style={{ 
+          position: 'absolute', 
+          bottom: '0px', 
+          left: '50%', 
+          width: '100%',
+          height: '100px',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+          zIndex: 50,
+          pointerEvents: 'auto',
+          transition: 'all 0.3s'
+        }}
+      >
+        <div style={{ 
+          background: 'rgba(0,0,0,0.95)', 
+          padding: '10px 40px', 
+          borderRadius: '20px 20px 0 0', 
+          border: '1px solid #000',
+          borderBottom: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '15px',
+          boxShadow: '0 -5px 15px rgba(0,0,0,0.2)'
+        }}>
+          <Skull size={18} color="#fff" />
+          <div style={{ color: '#fff', fontSize: '0.8rem', fontWeight: 900, letterSpacing: '4px' }}>
+            OPEN OCCULT TABLE
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Diegetic View Overlays */}
+      <AnimatePresence>
+        {activeView === 'map' && (
+          <motion.div 
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 120 }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 100, display: 'flex' }}
+          >
+            <div className="vignette-overlay" style={{ position: 'absolute', width: '100%', height: '100%', background: 'radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%)', pointerEvents: 'none' }} />
+            <div className="glass-panel" style={{ width: '80%', height: '90%', margin: 'auto', position: 'relative', padding: '40px' }}>
+              <button onClick={() => setActiveView(null)} style={{ position: 'absolute', top: '20px', right: '20px', background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>CLOSE</button>
+              <h2 style={{ letterSpacing: '5px', marginBottom: '30px' }}>ARCHIPELAGO MAP</h2>
+              <div style={{ width: '100%', height: '80%', border: '1px solid rgba(0, 229, 255, 0.3)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ fontSize: '1rem', opacity: 0.3 }}>[ MAP RENDERER GOES HERE ]</span>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {activeView === 'notebook' && (
+          <motion.div 
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 100, display: 'flex', background: 'rgba(0,0,0,0.8)' }}
+          >
+            <div className="glass-panel" style={{ width: '850px', height: '600px', margin: 'auto', position: 'relative', display: 'flex', overflow: 'hidden', padding: '0' }}>
+              {/* Left Page: Crew Stats & Ship Resources */}
+              <div style={{ flex: 1, padding: '40px', borderRight: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.02)', display: 'flex', flexDirection: 'column' }}>
+                <h3 style={{ fontSize: '0.7rem', letterSpacing: '3px', opacity: 0.5, marginBottom: '30px' }}>CREW MANIFEST</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '40px' }}>
+                  {crew.map(m => (
+                    <div key={m.role} style={{ padding: '15px', background: 'rgba(0,0,0,0.2)', borderRadius: '8px' }}>
+                      <div style={{ fontWeight: 800, fontSize: '0.8rem', color: '#4ade80' }}>{m.role}</div>
+                      <div style={{ display: 'flex', gap: '15px', marginTop: '10px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                          <Coffee size={14} color="#ff9d00" />
+                          <span style={{ fontSize: '0.8rem' }}>2</span>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                          <Droplets size={14} color="#00e5ff" />
+                          <span style={{ fontSize: '0.8rem' }}>3</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: 'auto', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px' }}>
+                  <h3 style={{ fontSize: '0.7rem', letterSpacing: '3px', opacity: 0.5, marginBottom: '20px' }}>SHIP RESOURCES</h3>
+                  <div style={{ display: 'flex', gap: '30px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <Wind size={20} color="#a060ff" />
+                      <div>
+                        <div style={{ fontSize: '0.6rem', color: 'var(--text-dim)' }}>RUM</div>
+                        <div style={{ fontWeight: 800, fontSize: '1.2rem' }}>{supplies.rum}</div>
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <Anchor size={20} color="#704010" />
+                      <div>
+                        <div style={{ fontSize: '0.6rem', color: 'var(--text-dim)' }}>WOOD</div>
+                        <div style={{ fontWeight: 800, fontSize: '1.2rem' }}>{supplies.wood}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Right Page: Journal */}
+              <div style={{ flex: 1, padding: '40px', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                  <h3 style={{ fontSize: '0.7rem', letterSpacing: '3px', opacity: 0.5 }}>CAPTAIN'S LOG: DAY {day}</h3>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <ChevronRight size={20} style={{ transform: 'rotate(180deg)', opacity: 0.3 }} />
+                    <ChevronRight size={20} />
+                  </div>
+                </div>
+                <div style={{ flex: 1, fontSize: '1rem', lineHeight: '1.8', fontStyle: 'italic', color: 'var(--text-main)' }}>
+                  {log[log.length-1]}
+                </div>
+                <div style={{ display: 'flex', gap: '15px', alignSelf: 'flex-end' }}>
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    onClick={handleNextDay} 
+                    style={{ padding: '12px 30px', background: 'rgba(255, 62, 62, 0.2)', border: '1px solid rgba(255, 62, 62, 0.4)', color: 'white', cursor: 'pointer', fontWeight: 800, letterSpacing: '2px' }}
+                  >
+                    NEXT DAY
+                  </motion.button>
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    onClick={() => setActiveView(null)} 
+                    style={{ padding: '12px 30px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', cursor: 'pointer', fontWeight: 800, letterSpacing: '2px' }}
+                  >
+                    CLOSE JOURNAL
+                  </motion.button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {activeView === 'occult' && (
+          <motion.div 
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 100, display: 'flex', background: 'rgba(10, 0, 20, 0.9)' }}
+          >
+            <div className="vignette-overlay" style={{ position: 'absolute', width: '100%', height: '100%', background: 'radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%)', pointerEvents: 'none' }} />
+            <div className="glass-panel" style={{ width: '90%', height: '85%', margin: 'auto', padding: '40px', border: '1px solid #a060ff', position: 'relative' }}>
+              {/* Curse Status Bar */}
+              <div style={{ marginBottom: '40px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                  <span style={{ color: '#a060ff', fontWeight: 800, letterSpacing: '2px', fontSize: '0.8rem' }}>SEA CURSE POTENTIAL</span>
+                  <span style={{ color: getCurseColor(seaCurse), fontWeight: 900 }}>{seaCurse}%</span>
+                </div>
+                <div style={{ height: '12px', background: 'rgba(255,255,255,0.1)', borderRadius: '6px', overflow: 'hidden' }}>
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${seaCurse}%` }}
+                    style={{ height: '100%', background: getCurseColor(seaCurse), boxShadow: `0 0 15px ${getCurseColor(seaCurse)}` }}
+                  />
+                </div>
+              </div>
+
+              <button onClick={() => setActiveView(null)} style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: 'white', padding: '5px 15px', cursor: 'pointer' }}>CLOSE</button>
+              <h2 style={{ color: '#a060ff', letterSpacing: '10px', fontSize: '2rem' }}>THE OCCULT TABLE</h2>
+              
+              <div style={{ marginTop: '50px', display: 'flex', gap: '60px' }}>
+                <div style={{ flex: 1, height: '400px', border: '1px solid rgba(160, 96, 255, 0.2)', borderRadius: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(160, 96, 255, 0.05)' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <Skull size={80} color="rgba(160, 96, 255, 0.4)" style={{ marginBottom: '20px' }} />
+                    <BookOpen size={40} color="rgba(160, 96, 255, 0.3)" />
+                  </div>
+                </div>
+                <div style={{ flex: 1.5 }}>
+                  <h3 style={{ color: '#a060ff', marginBottom: '20px', letterSpacing: '3px' }}>DARK RITUALS</h3>
+                  <div style={{ color: 'var(--text-dim)', lineHeight: '1.8', fontSize: '1.1rem' }}>
+                    <p style={{ marginBottom: '20px' }}>The skull of the first navigator whispers secrets of the deep. Potions brewed from kraken ink and siren tears can stall the inevitable, but the Sea Curse never truly sleeps.</p>
+                    <div style={{ padding: '20px', background: 'rgba(160, 96, 255, 0.1)', borderLeft: '4px solid #a060ff', fontStyle: 'italic' }}>
+                      "Blood for wood, souls for rum. The archipelago demands a price for every league traveled."
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
@@ -168,7 +453,7 @@ const App = () => {
         className="glass-panel"
         style={{ width: '300px', height: '90vh', margin: 'auto 20px', padding: '40px 20px', display: 'flex', flexDirection: 'column', gap: '20px' }}
       >
-        <h1 style={{ fontFamily: 'Outfit', fontSize: '2.5rem', fontWeight: 800, marginBottom: '40px', background: 'linear-gradient(45deg, #ff3e3e, #ff9d00)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+        <h1 style={{ fontFamily: 'Outfit', fontSize: '2.5rem', fontWeight: 800, marginBottom: '40px', background: 'linear-gradient(45deg, #ff3e3e, #ff9d00)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '4px' }}>
           60S 2.0
         </h1>
         

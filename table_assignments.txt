@@ -1,0 +1,86 @@
+\documentclass[a4paper,10pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{pdflscape}
+\usepackage{setspace}
+
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{}{0pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+\begin{document}
+
+\chapter*{60SECONDS 2.0: Master Project Execution Plan}
+
+\begin{center}
+    \textbf{PREPARED BY:} Maria-Daria Tompea \\
+    \textbf{DATE:} May 16, 2026 \\
+    \textbf{VERSION:} 1.3
+\end{center}
+
+\section*{Section 1: Comprehensive Task Definitions \& Deliverables}
+
+\subsection*{1.1. User Interface (UI) \& Login Systems}
+\begin{itemize}
+    \item \textbf{Login/Signup System:} (Prog 1 + Prog 2) Development of the authentication portal. Prog 1 will implement the Supabase Auth connection (handling user sessions, passwords, and security). Prog 2 will design the diegetic UI—a login screen that looks like a 1950s "Civil Defense Authorization" form.
+    \item \textbf{Intro Background \& Cinematic:} (Puputeve) Puputeve will create the very first visual the player sees. This includes a high-detail painting of the pre-war neighborhood, used as the backdrop for the main menu and the initial story transition.
+    \item \textbf{The Interactive Journal:} (Ilayda + Prog 2) This is the core UI. It must dynamically display text from Maria-Daria's scenario pool. It includes "Interactive Stamps" (choices), a calendar tracker, and individual character health/sanity monitors.
+\end{itemize}
+
+\subsection*{1.2. World-Building \& Environmental Art}
+\begin{itemize}
+    \item \textbf{Neighborhood Map:} (VikiPéDia) Viki will design the layout of the 60Seconds neighborhood. This is a grid-based map with 10-15 interactive locations (Pharmacy, Grocery, Military Outpost). It requires distinct icons for "Explored," "Unexplored," and "Hostile" states.
+    \item \textbf{Shelter Interior:} (VikiPéDia + Puputeve) A layered 2D environment. Viki will block out the structure (lineart), and Puputeve will handle the final textures and lighting. It must feature interactive "Hotspots" (e.g., clicking the Radio opens the broadcast menu).
+    \item \textbf{Item Asset Library:} (Puputeve) Creation of 20+ individual item sprites, including food, water, tools (Axe, Radio, Medkit), and rare quest items.
+\end{itemize}
+
+\subsection*{1.3. Narrative \& Technical Logic}
+\begin{itemize}
+    \item \textbf{30 Branching Scenarios:} (Maria-Daria) Maria-Daria will write 30 scenarios, each containing a prompt, 2-3 choices, and a matrix of outcomes (e.g., "If you have the Axe, you gain soup; if not, you get sick"). These must be formatted as JSON for backend integration.
+    \item \textbf{The Entropy Engine (RNG):} (Ilayda) Developing the logic that decides which scenarios trigger each day. It uses "Weighted Probability" based on the current state (e.g., if the party is starving, the probability of finding food increases).
+    \item \textbf{Metabolic Decay System:} (Prog 1) Programming the hidden variables for Hunger, Thirst, Fatigue, and Sanity. These variables must tick forward every "Midnight" cycle based on the choices made in the Journal.
+\end{itemize}
+
+\subsection*{1.4. Polish \& Meta-Systems}
+\begin{itemize}
+    \item \textbf{Achievement System:} (Prog 1 + Maria-Daria) Implementation of 15+ unlocks (e.g., "Survivalist," "Mutant Parent"). Maria-Daria defines the triggers; Prog 1 implements the tracking logic.
+    \item \textbf{Audio \& Sound FX Triggers:} (Prog 2) Setting up the "Hooks" for sound effects (e.g., a "paper rustle" sound when the journal page turns, or a "Geiger click" when the radio is on).
+\end{itemize}
+
+\newpage
+\begin{landscape}
+\section*{Section 2: Detailed Individual Assignment Table}
+\centering
+\scriptsize
+\begin{tabularx}{1.4\textwidth}{l|X|X|X|X|X|X}
+\toprule
+\textbf{Date Range} & \textbf{Maria-Daria} & \textbf{Ilayda} & \textbf{VikiPéDia} & \textbf{Puputeve} & \textbf{Optional Prog 1} & \textbf{Optional Prog 2} \\ \midrule
+Sept 01-14 & [M] Narrative (1-5) & API Architecture & Char 1 Concept & \textbf{Intro BG Sketch} & Supabase Auth Hook & \textbf{Login Page UI} \\ \midrule
+Sept 15-30 & Core Logic Design & Player State Logic & Char 1 Lineart & \textbf{Intro BG Final} & User DB Relations & Login Logic Sync \\ \midrule
+Oct 01-14 & [M] Narrative (6-10) & Journal Engine & Char 2 Concept & Shelter BG Sketch & Data Persistence & Journal Layout UI \\ \midrule
+Oct 15-31 & JSON Serialization & Choice Algorithm & Char 2 Lineart & \textbf{Shelter BG Final} & Error Logging & Journal Animations \\ \midrule
+Nov 01-14 & [M] Narrative (11-15) & Expedition Logic & \textbf{Map Layout Grid} & Shelter Prop Set 1 & Map DB Tables & \textbf{Map UI Prototype} \\ \midrule
+Nov 15-30 & Pool Weighting Sys & Loot RNG Hub & Map Zone Icons & Shelter Prop Set 2 & Zone Loot Logic & Map Interactivity \\ \midrule
+Dec 01-14 & [M] Narrative (16-20) & Win/Loss Checks & Char 3 Concept & Item Set: Tools & Achievement DB & End-game UI \\ \midrule
+Dec 15-31 & Ending Scripting & Metabolic Simulation & Char 3 Lineart & Item Set: Rare & Status Formulas & Inventory UI Polish \\ \midrule
+Jan 01-14 & [M] Narrative (21-25) & Progression Sys & Char 4 Concept & Exterior BG (City) & Skill XP Logic & Skill Tree UI \\ \midrule
+Jan 15-31 & Leveling Logic & Achievement Logic & Char 4 Lineart & Exterior BG (Zone) & Global Stats API & Notification Sys \\ \midrule
+Feb 01-14 & [M] Narrative (26-30) & Idle Anim Logic & Char 5 Concept & UI Icon Set (Full) & Sound FX Triggers & Asset Optimization \\ \midrule
+Feb 15-28 & Final Script Pass & State Sync Validation & Char 5 Lineart & Promo Art Assets & Security Audit & Beta Debugging \\ \midrule
+Mar 01-15 & \textbf{DEMO SIGN-OFF} & \textbf{DEPLOYMENT} & \textbf{OPTIMIZE} & \textbf{FINAL RENDERS} & \textbf{BUG SQUASH} & \textbf{UX POLISH} \\ \bottomrule
+\end{tabularx}
+\end{landscape}
+
+\newpage
+\section*{Section 3: Project Requirements \& Policies}
+\begin{itemize}
+    \item \textbf{GitHub Branching:} All features must be developed on branches (e.g., \textit{feature/login-system}).
+    \item \textbf{Asset Delivery:} Artists must provide layered PSDs to Maria-Daria and PNGs to Developers.
+    \item \textbf{The Two-Strike Rule:} Missing 2 bi-weekly deadlines triggers exclusion from the final project and revenue sharing.
+\end{itemize}
+
+\end{document}
