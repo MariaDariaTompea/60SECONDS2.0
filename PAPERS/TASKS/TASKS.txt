@@ -146,7 +146,7 @@ Execute 33\% of the total programming sprint tasks (Login Page, Main Menu UI, Di
 Scuty \newline (Programmer) & 
 Execute 33\% of the total programming sprint tasks (Login Page, Main Menu UI, Difficulty Selection, and Character Database logic). \\
 \hline
-Eclipse \newline (Programmer) & 
+Denny \newline (Programmer) & 
 Execute 33\% of the total programming sprint tasks (Login Page, Main Menu UI, Difficulty Selection, and Character Database logic). \\
 \hline
 VikiPéDia \newline (Artist) & 
@@ -196,7 +196,7 @@ Scuty \newline (Programmer) &
     \item \texttt{GameSettings}: to store user preferences and \texttt{keep\_me\_logged\_in} client state if mapped to the DB.
 \end{itemize} \\
 \hline
-Eclipse \newline (Programmer) & 
+Denny \newline (Programmer) & 
 \textbf{Character Database \& Roster UI:}
 \begin{itemize}[leftmargin=*, nosep]
     \item Build the scrollable character roster UI, including padlock overlays, lock warnings, and detailed lore popups.
@@ -238,4 +238,148 @@ Puputeve \newline (Artist) &
 \hline
 \end{tabularx}
 
+\newpage
+\section*{Second Assignment Sprint}
+\textbf{Duration:} September 26, 2026 -- October 10, 2026
+
+\subsection*{Programmer Responsibilities}
+
+\subsubsection*{Account Profile \& Global Settings}
+\begin{itemize}
+    \item \textbf{Profile Dashboard:} Create an Account page displaying the user's profile image, total games played, overall success rate, and total number of characters owned.
+    \item \textbf{Credential Management:} Implement functionality to change the user's password and nickname. \textit{(CRITICAL: The pre-purchased key is a unique currency identifier and CANNOT be changed under any circumstances.)}
+    \begin{itemize}
+        \item \textbf{Password Change:} Must trigger a confirmation popup (\textit{"Are you sure you want to change your password?"}). If confirmed, process the change; if canceled, simply close the popup.
+        \item \textbf{Nickname Change:} Requires no confirmation popup, but must include strict input validation (minimum 4 characters, maximum 20 characters).
+    \end{itemize}
+    \item \textbf{Global Settings:} Implement interface controls for screen brightness and audio levels (music/SFX volume).
+    \item \textbf{Navigation:} Ensure a functional 'Back' button correctly routes the user to the previous menu or login screen.
+\end{itemize}
+
+\subsubsection*{Scenario Logic \& Database Integration}
+\begin{itemize}
+    \item \textbf{Core Event System:} Design the database and logic framework to handle dynamic scenario progression.
+    \begin{itemize}
+        \item Support scenarios that can be skipped by the player.
+        \item Implement decision branching (e.g., Yes/No prompts). Depending on the choice, the specific scenario branch will either close permanently or trigger follow-up events in the future.
+        \item Implement item pool mechanics: Scenarios may present a pool of 1 to 5 items. The player's selection dictates the ongoing narrative continuation.
+    \end{itemize}
+    \item \textbf{Initial Story Implementation:} Fully integrate the first 4 default (non-randomized) story scenarios established in Sprint 1 into this new logic system.
+\end{itemize}
+
+\subsubsection*{Quality Assurance \& Testing}
+\begin{itemize}
+    \item Conduct comprehensive testing of the application to ensure all features developed across the first two sprints (Login, Main Menu, Difficulty, Character Roster, Settings, and Scenarios) function harmoniously.
+\end{itemize}
+
+\subsection*{Artist Responsibilities}
+
+\subsubsection*{Default Character Portraits}
+\begin{itemize}
+    \item Finalize the visual design and drawing of the first 4 default characters.
+    \item Ensure each of the 4 characters is fully rendered in all 4 required dynamic states: \textit{Sane, Insane, Sick,} and \textit{Tired}. (Totaling 16 distinct character assets).
+    \item Ensure visual consistency with the established lore and physical descriptions.
+\end{itemize}
+
+\newpage
+\section*{Second Assignment: Detailed Task Assignments (Table 3)}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\hsize=.25\hsize\bfseries}X | >{\hsize=.75\hsize}X|}
+\hline
+Name & Task Description \\
+\hline
+Maria-Daria Tompea \newline (Manager) & 
+\begin{itemize}[leftmargin=*, nosep]
+    \item Conduct final, comprehensive Quality Assurance (QA) testing of the entire application build.
+    \item Provide on-demand assistance and troubleshooting for both the programming and art teams.
+\end{itemize} \\
+\hline
+Illayda \newline (Programmer) & 
+Execute 33\% of the total programming sprint tasks (focusing on Account Profile UI, Settings, and Credential Management). \\
+\hline
+Scuty \newline (Programmer) & 
+Execute 33\% of the total programming sprint tasks (focusing on Scenario Database Architecture and Event Logic). \\
+\hline
+Denny \newline (Programmer) & 
+Execute 33\% of the total programming sprint tasks (focusing on Initial Story Implementation and Integration Testing). \\
+\hline
+VikiPéDia \newline (Artist) & 
+Execute 50\% of the artistic workload (Draw complete state portraits for 2 of the default characters). \\
+\hline
+Puputeve \newline (Artist) & 
+Execute 50\% of the artistic workload (Draw complete state portraits for the remaining 2 default characters). \\
+\hline
+\end{tabularx}
+
+\newpage
+\section*{Second Assignment: Specific Task Allocations (Table 4)}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\hsize=.25\hsize\bfseries}X | >{\hsize=.75\hsize}X|}
+\hline
+Name & Granular Task Allocation \\
+\hline
+Maria-Daria Tompea \newline (Manager) & 
+Refer to the comprehensive tasks detailed above in Table 3. \\
+\hline
+Illayda \newline (Programmer) & 
+\textbf{Account Profile \& Global Settings:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Build the Account Dashboard displaying profile image, games played, success rate, and characters owned.
+    \item Implement Nickname change (4-20 char validation) and Password change (with confirmation popup). Ensure the Key remains unchangeable.
+    \item Implement Settings sliders (Brightness, Volume) and the navigational 'Back' button.
+\end{itemize}
+\textbf{Database Tables to Implement/Update:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Update \texttt{Users}: Add \texttt{nickname}, \texttt{games\_played}, \texttt{success\_rate}.
+    \item Update \texttt{GameSettings}: Add \texttt{brightness}, \texttt{music\_volume}, \texttt{sfx\_volume}.
+\end{itemize} \\
+\hline
+Scuty \newline (Programmer) & 
+\textbf{Scenario Database \& Event Logic:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Design the backend architecture for branching narratives (Yes/No decision trees, skipping logic).
+    \item Code the logic for Item Pool selection (handling 1 to 5 items) and its impact on subsequent scenario triggering.
+\end{itemize}
+\textbf{Database Tables to Implement:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item \texttt{Scenarios}: to store \texttt{scenario\_id}, \texttt{text\_prompt}, \texttt{is\_skippable}, \texttt{item\_pool\_refs}.
+    \item \texttt{ScenarioDecisions}: to map \texttt{scenario\_id} choices (Yes/No) to \texttt{next\_scenario\_id}.
+\end{itemize} \\
+\hline
+Denny \newline (Programmer) & 
+\textbf{Story Implementation \& Integration Testing:}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Hardcode and integrate the first 4 default (non-generated) scenarios into Scuty's logic system.
+    \item Conduct rigorous QA testing across all Sprint 1 and Sprint 2 features to ensure seamless integration.
+\end{itemize} \\
+\hline
+\end{tabularx}
+
+\newpage
+\section*{Second Assignment: Specific Task Allocations (Artists)}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{|>{\hsize=.25\hsize\bfseries}X | >{\hsize=.75\hsize}X|}
+\hline
+Name & Granular Task Allocation \\
+\hline
+VikiPéDia \newline (Artist) & 
+\textbf{Character Portraits (Batch 1):}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Draw Character A in all 4 states (Sane, Insane, Sick, Tired).
+    \item Draw Character B in all 4 states (Sane, Insane, Sick, Tired).
+\end{itemize} \\
+\hline
+Puputeve \newline (Artist) & 
+\textbf{Character Portraits (Batch 2):}
+\begin{itemize}[leftmargin=*, nosep]
+    \item Draw Character C in all 4 states (Sane, Insane, Sick, Tired).
+    \item Draw Character D in all 4 states (Sane, Insane, Sick, Tired).
+\end{itemize} \\
+\hline
+\end{tabularx}
+
 \end{document}
+
