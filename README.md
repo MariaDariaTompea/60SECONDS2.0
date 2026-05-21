@@ -1,0 +1,1 @@
+CODE is not correct currently. It will be erased and we start over again. You have the paper demo currently , how assignments will look, but they will be updated. Please check each week for updates in papers. Please sign the contracts and send me the signed version in private to make sure who stays.
