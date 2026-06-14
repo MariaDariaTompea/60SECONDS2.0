@@ -1,0 +1,51 @@
+Welcome, designers! Are you ready to start creating your characters?
+
+To make it easier for programmers to understand and know exactly which assets to integrate without sorting through unorganized files, please follow these guidelines when uploading your work to GitHub.
+
+Please read the following explanation and structure your folders and files accordingly.
+--------------------------
+A. Folder Structure & Status Tracking
+
+1. Create a folder in the CHARACTERS directory named after your producer name.
+2. Inside it, add a file named `00_CURRENT`.
+   - Update `00_CURRENT` every time you work on something so that programmers and the manager can track your progress.
+   - It does not need to be complex: simply state what you are working on, which file it is in, and if you have finalized anything that should be verified this week.
+3. Inside your producer folder, add a separate subfolder for each character.
+   - Use the character's name as the folder name (you can change it later if needed).
+   - Use the following naming suffixes to indicate the character's status:
+     * In-Progress: If you haven't finished all concepts for a character, append `_DEMO` to the folder name (e.g., `CharacterName_DEMO`).
+     * Ready for Review: If a character is finished, ask the manager to check it and append `_UNVERIFIED` (e.g., `CharacterName_UNVERIFIED`).
+     * Approved: Once the manager approves the character prototype, they will rename the folder to `0_[CHARACTER NAME]`.
+-------------------------
+B. Required Character Folder Contents
+
+Inside each character's folder, you must create the following 4 specific items:
+
+1. A text file named `description.txt` detailing the character:
+   - Origin (where they come from).
+   - The general backstory/story behind them.
+   - Important gameplay mechanics (if applicable).
+   - Unlock conditions: specify which game mode they are acquired in (if they are not unlocked by default for free, you must also create a 5th document; see section [5] below).
+   - Any other relevant details.
+
+2. A background image [screenshot] used when viewing the character in the Collection tab.
+
+3. All chibi states [screenshot] of the character:
+   - There should normally be around 5 chibi states.
+   - If the character is immune to tiredness or sickness, there might be 4 states instead (with 2 of them being duplicates).
+
+4. A folder containing all source PNG assets from the drawing application or browser tool you used.
+
+[5] Scenario Path (Only required if the character is not unlocked at the start of the game):
+   - Talk to the manager to get more information and details on this.
+   - Keep scenario paths concise unless the character has extensive lore.
+   - Each scenario can have a maximum of 7 steps:
+     * Easy scenarios: ~3 steps
+     * Medium scenarios: ~5 steps
+     * Hard scenarios: ~7 steps
+   - Scenario Flow Format:
+     SCENARIO START: Story 1 (The starting point; no item required to proceed) 
+     ---> Story 2 (Requires a YES/NO choice or a specific item to proceed the plot) 
+     ---> Story 3 (Same logic as above) 
+     ... 
+     ---> Story 7 (Unlock the character)
