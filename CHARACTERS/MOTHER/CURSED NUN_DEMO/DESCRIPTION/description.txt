@@ -1,0 +1,439 @@
+================================================================================
+CHARACTER DOSSIER & EXPANDED GAME LORE
+================================================================================
+
+--------------------------------------------------------------------------------
+CHARACTER IDENTITY & BACKGROUND
+--------------------------------------------------------------------------------
+Name: Sister Valerie, The Drowned Mockery
+
+Background Story:
+For over three decades, Sister Valerie was the crown jewel of the Ascendant Faith,
+an absolute instrument of the Holy King’s divine mandate. The clergy preached a
+simple, unyielding equation to the populace: absolute obedience yields divine 
+karma; absolute suffering in this life guarantees a fortune of light in the 
+next. Valerie lived by the lash, scarifying her flesh and executing the King’s 
+purges under the total conviction that she was weaving a golden destiny.
+
+The illusion shattered during the Cleansing of the Low-Quarter—her own 
+birthplace. Tasked with rooting out "spiritual rot," Valerie discovered that the 
+heresy the King fought so desperately to suppress was nothing more than the 
+starving peasantry discovering a horrifying truth. The "Divine Karma" accumulated 
+by the faithful wasn’t a cosmic blessing; it was a literal, quantifiable life-
+essence harvested by the Spire’s golden machinery to fuel the King’s immortality 
+and the aristocracy’s decadence. The "good fortune" promised to her was a lie 
+meant to keep the cattle compliant until slaughter.
+
+When Valerie confronted the High Prelate, she was met with mocking laughter. 
+They derided her scars, her piety, and her absolute naivety. She was thrown 
+into the Drowning Vaults—the sub-aquatic trenches beneath the city where the 
+regime discarded their most dangerous secrets. Bound in heavy iron chains and 
+cast into the abyssal waters, Valerie did not pray to the Silent King. Instead, 
+as the freezing black brine filled her lungs, she screamed a curse at the sky.
+
+The depths answered. The Sea Curse—an ancient, primordial malice older than the 
+kingdom itself—did not offer salvation; it offered an exchange. It wanted the 
+total eradication of the Iron Spire's lineage, and Valerie wanted a stage upon 
+which to perform their ruin. She swallowed the black water, her soul fracturing 
+as the entity granted her immense, tide-turning power. 
+
+When she dragged herself back onto the stone shores, she tailored a new uniform 
+from the remnants of her sacred vestments—twisting the holy silhouette into a 
+garish, theatrical mockery. If the Ascendant Faith was a circus of lies, she 
+would be its grand, blood-drenched jester. She now roams the blighted waters, 
+waiting for a crew foolish enough to embrace her chaotic ruin.
+
+Visual Description:
+Valerie’s design is a sharp, stylized subversion of holy vestments. She wears 
+a deep crimson and white habit styled with exaggerated, clown-like proportions—
+puffed shoulders, a corset-sharp bodice, and a jagged, blood-red spiked crown 
+that mimics both a halo and a court jester’s cap. Her eyes are permanently 
+masked by a heavy black veil emblazoned with a glowing, cross-like sigil of the 
+Sea Curse, exposing only a wide, unsettling grin filled with razor-sharp, 
+shark-like teeth. In her default state, she sits perched eerily on a wooden 
+stool or chair, arms folded or lightly gesturing, maintaining a manic, tight-
+lipped focus. When her sanity completely breaks, her jaw unhinges into a 
+hysterical, wide-mouthed void of laughter, her limbs twitching with puppet-like 
+erraticism.
+
+--------------------------------------------------------------------------------
+GAMEPLAY MECHANICS & BALANCING
+--------------------------------------------------------------------------------
+Playstyle Overview:
+Valerie is the ultimate high-risk, high-reward chaotic play champion. In her 
+Normal State, she possesses subpar stats: baseline human health, standard 
+starting sanity, and absolutely no innate survival buffs. To unleash her true 
+potential, the player must actively make terrible decisions, accumulate misery, 
+and intentionally trigger the Sea Curse—sacrificing the well-being, health, and 
+sanity of the rest of the crew to force Valerie's dark ascension.
+
+Nightmare Mode Special Feature: The Sea Curse
+In Nightmare Mode, specific narrative decisions, crew failures, or occult 
+interactions raise the global "Sea Curse" meter. High curse levels ravage human 
+crew members and standard mortal races with severe sickness, phantom hauntings, 
+and rapid sanity drain. However, deep-sea aberrations and occultists benefit 
+from the chaos.
+
+Abyssal Awakening (Above 70% Sea Curse Passives):
+When the global Sea Curse surpasses 70%, Valerie unlocks her latent power:
+
+1. Passive: Tainted Communion
+   Valerie gains full access to the ship's Occult Table. While standard crew 
+   members risk madness or death by touching occult artifacts, Valerie treats 
+   them as standard tools, extracting maximum efficiency from cursed items 
+   without taking damage.
+
+2. Active Ability 1: Brinewind Retribution
+   When the ship is attacked by pirates, enemy vessels, or hostile boarding 
+   parties (of human or any non-occultist race), Valerie channels the fury of 
+   the depths. The sea rises up, obliterating the attackers instantly. The ship 
+   takes 0 damage and the crew is entirely saved from combat harm. 
+   (Randomized trigger chance upon combat entry).
+
+3. Active Ability 2: Abyssal Devotion (Sacrificial Bond)
+   Valerie completely and permanently breaks her own sanity for the remainder 
+   of the run, locking her into the 'Crazy' state. In exchange, she links her 
+   shattered mind to a chosen crew member departing on an expedition. The 
+   expeditionary gains a +200% Luck bonus (rendering them entirely immune to 
+   random expedition sickness and hazards) and a 15% chance to return with a 
+   Mythic Item.
+
+The Mythic Item: The Lost Curse Cross
+Lore: The Lost Curse Cross was the original holy symbol Valerie wore during her 
+days in the Ascendant Faith. When she was chained and cast into the Drowning 
+Vaults, the golden cross absorbed the localized agony of her betrayal alongside 
+the unfiltered, crushing weight of the primordial Sea Curse. It sank into the 
+deepest volcanic vents of the ocean floor, lost to time. It is no longer holy; 
+the gold has turned a matte, obsidian black, and a pulsing crimson eye made of 
+living coral has grown over its center. Holding it completely halts the sanity 
+drain of whoever carries it, but causes all other crew members on the ship to 
+hallucinate, accelerating the generation of the Sea Curse by 5% every morning.
+
+================================================================================
+THE UNLOCK SCENARIO: THE JESTER'S CONGREGATION (7-STEP EVENT)
+================================================================================
+
+[PAGE 1: THE FIRST ENCOUNTER]
+The horizon bleeds an unnatural, bruised purple as the ship drifts through an 
+unmapped stretch of dead water. The lookout rings the bell, pointing toward a 
+sole solitary object bobbing in the waves: a rotting wooden chair floating 
+perfectly upright upon the sea. Sitting upon it is a figure dressed in tattered, 
+clownish crimson nun vestments, her face hidden behind a pitch-black veil. As the 
+ship draws near, she doesn't cry out for help. She simply sits there, hands 
+neatly folded in her lap, watching the hull approach with a wide, razor-toothed 
+grin that gleams in the twilight. The crew shivers; the sea around her chair is 
+thick, black, and completely devoid of waves.
+
+[PAGE 2: THE SECOND ENCOUNTER & CONVERSATION]
+Against the crew's better judgment, the ship draws close enough to speak. The 
+figure tilts her head, her jagged red crown glinting as she speaks in a voice 
+that sounds like grinding tectonic plates and rushing tide water. 
+"Oh, look at you! A brave little box of kindling floating right into the 
+slaughterhouse," she purrs, her grin widening. "Tell me, little sailors, did the 
+world promise you golden shores? Did your gods tell you honesty brings good 
+fortune? Let me let you in on a little secret... the only thing waiting for you 
+at the end of your righteous path is the butcher's cleaver!" She laughs, a 
+short, musical sound that makes the timbers of your ship groan. "I played their 
+game. I bled for their altars. And the sea taught me the punchline."
+
+[PAGE 3: THE DECISION (YES / NO)]
+The strange nun leans forward, resting her chin in her hands, her unblinking veil 
+staring directly into the captain's eyes. "I am bored of watching the tides turn 
+empty shells. I want to see how your little tragedy ends. Let me speak to your 
+tools, or keep rowing your wooden coffin into the dark. Do you care to play a 
+game of wits with a dead woman?"
+-> OPTION A: Yes. Listen to what she wants. (Proceed to Page 4)
+-> OPTION B: No. Steer clear of this madness and row away. (Event Ends. Valerie 
+             disappears into the fog; global sanity drops by 10).
+
+[PAGE 4: THE FIRST TOLL (ITEM REQUIRED - NOT DESTROYED)]
+The nun claps her hands together in delight. "Splendid! A audience! But a 
+performer requires a stage setting. Show me how you document your pathetic 
+little lives before the water claims them. Give me something to read, or 
+something to cut through the boring prose of your existence."
+To satisfy her curiosity without angering the sea, you must present an object of 
+intellect or structure. (The selected item WILL NOT break).
+-> REQUIREMENT: Provide [Map], [Journal], or [Axe].
+   - If [Map]: She traces the lines with a long, clawed finger, mocking the borders.
+   - If [Journal]: She laughs at the mundane entries of terrified men.
+   - If [Axe]: She tests the edge against her pale skin, whispering of old purges.
+(Proceed to Page 5)
+
+[PAGE 5: THE SACRIFICIAL TOLL (ITEM REQUIRED - DESTROYED)]
+Her smile turns sharp, hungry. The black water around her chair begins to rise, 
+creeping up the sides of your hull like living ink. "Now, a token of true faith," 
+she whispers. "The things that keep your bodies warm and your bellies full are 
+the very things that blind you to the deep. Destroy your comfort, or let the sea 
+swallow your steering wheel."
+You must sacrifice an essential survival tool to appease the growing curse. 
+(The selected item WILL BE permanently broken/consumed).
+-> REQUIREMENT: Sacrifice [Lantern] OR [Medkit].
+   - If [Lantern]: You smash the glass, throwing the flame into the black sea. It 
+     burns blue under the water before dying. (Lantern destroyed).
+   - If [Medkit]: You dump the medicine and bandages overboard; they instantly 
+     dissolve into a foul, brackish sludge. (Medkit destroyed).
+(Proceed to Page 6)
+
+[PAGE 6: THE ABYSSAL MANIFESTO]
+With the sacrifice accepted, the nun stands up from her floating chair. She 
+walks across the surface of the water as if it were solid stone, her heavy 
+skirts leaving trails of glowing, bioluminescent rot behind her. She steps over 
+the railing of your ship, her presence instantly causing the lanterns to flicker 
+and cast elongated, jester-like shadows across the deck. "The bargain is struck," 
+she whispers, her unhinged jaw twitching. "The deep has tasted your desperation, 
+and it finds the flavor... exquisite. I can anchor myself to your wooden ribs, 
+or I can leave a drop of my blood in your stew to guide your path."
+
+[PAGE 7: THE FINAL COMPACT (YES / NO)]
+The entity stands before you, her jagged red crown dripping with cold brine. The 
+ship's ledger lies open on the table. You must choose how to utilize this 
+shattered entity.
+-> OPTION A: Welcome her aboard as a permanent crew member.
+   (UNLOCKS CHARACTER: Sister Valerie is added to your roster. She takes up a 
+   crew slot. If you already own her, this entire event chain is permanently 
+   disabled from future runs).
+-> OPTION B: Refuse her residency, but demand her magic for the journey.
+   (Valerie vanishes back into the sea with a manic shriek. The ship does not 
+   unlock her, but instantly gains +40% Sea Curse, resets all current crew 
+   members' health to full, but reduces everyone's sanity to 15%).
+
+================================================================================
+20 EXPANDED GAME NARRATIVE EVENTS (ONBOARD SHIP)
+================================================================================
+
+1. THE JESTER'S VIGIL
+   Valerie sits on the food rations container all night, staring at the ceiling 
+   and laughing silently. 
+   - Effect: No one can sleep. All crew members lose 15 Sanity. Sea Curse 
+     increases by 5%.
+
+2. COLD BRINE IN THE STEW
+   A crew member catches Valerie pouring black, freezing sea water directly into 
+   the cooking pot while whispering an ancient hymn.
+   - Effect: If you let her finish, Sea Curse increases by 10%, one random character 
+     gets Sick, but Valerie gains +10% Health. If you stop her, Valerie loses 
+     20 Sanity.
+
+3. THE OCCULT TABLE'S HUM
+   As the global Sea Curse passes 40%, the Occult Table begins to glow with a 
+   crimson light that mirrors Valerie's crown. 
+   - Effect: Valerie can now salvage broken items at the table, but any human 
+     attempting to use it loses 30 Sanity instantly.
+
+4. THE REBEL'S TAUNT
+   Valerie corners a religious or highly disciplined crew member, tearing up their 
+   holy texts or personal journals while doing erratic clown dances.
+   - Effect: The targeted crew member drops to 0 Sanity and gains the "Traumatized" 
+     status. Sea Curse increases by 8%.
+
+5. ABYSSAL RETRIBUTION (COMBAT TRIGGER)
+   An enemy pirate ship fires upon your vessel. Valerie steps to the bow, her 
+   veil glowing bright red as she unhinges her jaw. 
+   - Effect: If Sea Curse is above 70%, the enemy ship is dragged down by giant 
+     black tendrils. 0 hull damage taken. If below 70%, Valerie laughs and 
+     takes 50% damage herself while the ship takes normal damage.
+
+6. SACRIFICIAL EXPEDITION PREPARATION
+   An expedition is launched into a dangerous island ruin. Valerie offers to 
+   bind her mind to the explorer.
+   - Effect: Valerie's Sanity drops permanently to 0 for the run. The explorer 
+     gains +200% Luck, cannot get sick, and has a 15% chance to find the Lost 
+     Curse Cross.
+
+7. THE LAUGHTER PARALYSIS
+   Valerie enters her "Crazy State" mid-cabin. Her non-stop, echoing laughter 
+   forces another crew member to lock themselves in a locker.
+   - Effect: The targeted crew member is unavailable for tasks or expeditions 
+     for the next 2 days due to severe mental breakdown.
+
+8. EXHAUSTION HUMMING
+   Valerie's exhaustion level drops below 80%. She sits completely still on her 
+   stool, emitting a low, vibrating hum that mimics the pressure of the trenches.
+   - Effect: The global Sea Curse meter increases by 2% every morning she remains 
+     at this exhaustion level.
+
+9. THE LOST CURSE CROSS MANIFESTATION
+   The crew returns from an expedition with an obsidian cross featuring a blinking 
+   coral eye. Valerie immediately snatches it.
+   - Effect: Valerie's Sanity drain stops completely. However, every morning 
+     the cross is on board, all other crew members lose 5 Sanity and global Sea 
+     Curse increases by 5%.
+
+10. FALSE MEDICINE
+    A crew member is severely sick in Hell Mode. Valerie offers to cure them 
+    using her "divine karma."
+    - Effect: The sickness is cured instantly, but the character's maximum 
+      Sanity cap is permanently reduced by 50% for the rest of the game.
+
+11. THE CLOWN'S MAKEUP
+    Valerie uses grease, ash, and old blood to paint garish clown faces on the 
+    walls of the ship's lower deck.
+    - Effect: Humans who view it refuse to enter the lower deck, preventing 
+      item retrieval for 1 day unless someone spends 10 Sanity to clean it.
+
+12. THE IMMUNITY PARADOX
+    A severe plague sweeps the ship during Hell Mode. Everyone is coughing up 
+    blood and losing health daily.
+    - Effect: Valerie is entirely unaffected due to her "Hurt/Sick" state 
+      invincibility. She can perform all tasks alone, but her laughter grows 
+      louder as her friends waste away.
+
+13. THE RITUAL PIECE
+    Valerie demands the captain give her an item from the Occult Table to "feed 
+    the waters."
+    - Effect: If you comply, an occult item is destroyed, but Valerie grants the 
+      ship immunity to sea monster encounters for the next 4 days.
+
+14. THE BREAKING CHAIR
+    The wooden stool Valerie sits on breaks due to the ship rocking in a storm.
+    - Effect: Valerie enters a manic rage, refusing to use abilities until you 
+      allocate 1 [Wood/Material] to craft her a new seat.
+
+15. MOCKING THE KING'S FLAG
+    The ship passes an old monument of the Holy King. Valerie climbs the mast 
+    and replaces your flag with a tattered piece of her clown outfit.
+    - Effect: Increases global Sea Curse by 15%, but guarantees that any 
+      subsequent encounters with royal navy ships will result in immediate combat.
+
+16. THE BLACK EYE OPENING
+    The sigil on Valerie's black veil begins to bleed real, ink-like sea water, 
+    flooding the main cabin floor.
+    - Effect: Increases the ship's weight, slowing travel time by 20% until a 
+      crew member spends a day bailing out the cursed water.
+
+17. PHANTOM APPARITIONS
+    Due to Valerie’s high curse level (above 80%), ghostly figures of drowned 
+    peasants from her hometown appear on the deck, pointing fingers at the crew.
+    - Effect: All crew members except Valerie lose 20 Sanity out of pure terror.
+
+18. THE CHOSEN SACRIFICE
+    Valerie whispers that the Sea Curse requires a flesh offering to guarantee a 
+    safe passage through a violent whirlpool.
+    - Effect: You can choose to sacrifice a crew member (killing them permanently). 
+      If you do, the ship passes safely and Valerie gains maximum stats. If you 
+      refuse, the ship takes 60% hull damage.
+
+19. THE UNHINGED SANITY CASCADE
+    Valerie reaches 0 Sanity while the global Sea Curse is at 95%. She begins to 
+    tear her own Crimson vestments apart.
+    - Effect: For the next 3 days, all random events triggered are guaranteed 
+      to be negative "Chaotic" occurrences, forcing severe management choices.
+
+20. THE FLOODED PUNCHLINE
+    The ship reaches its final destination, but Valerie's curse has completely 
+    overtaken the vessel (100% Sea Curse). 
+    - Effect: The game ending changes. Instead of a standard survival victory, 
+      Valerie transforms the ship into a floating vessel of the Deep, sailing 
+      back to the Holy Spire to enact total, cataclysmic vengeance.
+================================================================================
+================================================================================
+SECRET ENDING SPECIFICATIONS & SCENARIO PLOT
+================================================================================
+
+--------------------------------------------------------------------------------
+ENDING PROFILE
+--------------------------------------------------------------------------------
+Ending Title: SURVIVED... AT WHAT COST?
+Classification: [SURVIVED / PURGED] — The True Oceanic Tyrant Ending
+
+Trigger Conditions:
+1. Sister Valerie must be present in your starting crew roster.
+2. The global Sea Curse meter must be pushed past 70% to trigger her high-luck 
+   "Sacrificial Bond" ability during expeditions.
+3. The expedition team must successfully retrieve and bring back the Mythic Item: 
+   [The Lost Curse Cross] to the ship.
+4. All 4 chronological narrative plot events detailed below must be completed.
+
+Summary:
+Instead of reaching the standard safe haven to win the game, Valerie consumes the 
+entire narrative. By offering her the Lost Curse Cross, she transcends her physical 
+limitations, channels the complete wrath of the deep, and violently overthrows her 
+King's empire. The crew technically "survives" the harsh journey because they are 
+now under her absolute protection—but they are no longer free men. They are the 
+first conscripted subjects of a terrifying, eternal heretical dynasty.
+
+--------------------------------------------------------------------------------
+THE 4-EVENT ENDING PLOT CHAIN
+--------------------------------------------------------------------------------
+
+[EVENT 1: THE TENSE OBSERVER]
+Timeline: Triggered within the first 10 days of the journey if Valerie is on board.
+Description:
+The daily routine on the ship settles into a grinding, heavy silence. Valerie 
+doesn’t help with the rigging or the cooking; instead, she spends her hours 
+perched atop the water barrels or the corners of the deck, silently examining 
+every person on board. Her unblinking black veil follows the crew's movements 
+like a vulture tracking dying cattle. Every few hours, a sharp, sudden chuckle 
+bursts from behind her razor-sharp teeth for absolutely no visible reason. Living 
+in a confined space with a dynamic, unpredictable madwoman is rapidly turning 
+the ship into a waking nightmare. The men are constantly looking over their 
+shoulders, realizing that her quiet focus is far more dangerous than her loud 
+outbursts.
+- Gameplay Effect: All other crew members lose 10 Sanity. Global Sea Curse 
+  increases by 5%.
+
+[EVENT 2: THE ECHOES OF THE ABYSSAL RELIC]
+Timeline: Triggers randomly after Day 15 if the Lost Curse Cross has not been found.
+Description:
+During a particularly heavy fog, Valerie corners the captain by the steering wheel. 
+She presses her cold, brine-slicked fingers against her chest, right where her holy 
+symbol used to rest. "It calls to me from the volcanic trenches," she whispers, her 
+unhinged jaw twitching with a mixture of agony and ecstatic longing. "My old cross... 
+drowned in the vault, suffocating in the dark. It is too far away for my mortal eyes 
+to see, but the black tides know where it sleeps." She turns her veil toward the open 
+ocean, grinning wider. "If you want its power, you must let the brine fill this boat 
+first. Feed the sea its proper tribute... make the wrong choices... let the curse 
+rise above seventy percent, and I will bind my broken mind to your explorers. Only 
+then will the waters guide their hands to pull my beating heart from the deep."
+- Gameplay Effect: Unlocks the hint in the Quest Log. (Reminds the player that they 
+  need >70% Sea Curse to activate her Sacrificial Bond passive, granting the 200% 
+  luck required to find the Mythic Cross on an expedition). This event will repeat 
+  rarely until the cross is secured.
+
+[EVENT 3: THE CATACLYSMIC RITUAL]
+Timeline: Triggers automatically 1 morning after an expedition team successfully 
+          returns to the ship carrying [The Lost Curse Cross].
+Description:
+The moment the obsidian cross is brought on deck, Valerie snatches it with a manic 
+shriek. She drags her heavy wooden stool to the center of the cabin, slams her 
+Occult Book open, and forces the coral-covered cross onto the parchment. The pages 
+do not catch fire with ash—instead, they burn with a freezing, blinding crimson 
+chemical flame that melts through the wood of the table. Valerie falls into a 
+violent, twitching trance, chanting in a forgotten primordial tongue as the sky 
+outside turns completely pitch black. 
+
+A sudden, foul sickness sweeps through the horizon; across the waters, the flesh 
+of any royal scouting ships or enemy factions instantly begins to rot away from 
+their bones. Mountainous, unnatural waves rise up, completely ignoring the wind, 
+and begin violently slamming and pushing your boat forward at impossible speeds. 
+The sea itself is driving your crew directly toward Valerie's home town—the grand 
+capital of the Iron Spire. She stands at the bow, laughing hysterically into the 
+tempest as she prepares to launch an unholy siege. The crew can only hold onto the 
+masts for dear life, completely terrified, unsure if she means to let her tortured 
+soul finally rest, or if she intends to murder every living soul on the continent.
+- Gameplay Effect: All other crew members lose 15 Sanity. Global Sea Curse 
+  increases by 10%.
+
+[EVENT 4: FINAL CONQUEST: THE PUNCHLINE REALIZED]
+Timeline: Triggers on the final day of the game if Event 3 was completed.
+Description:
+The siege is over, and the old world has been completely erased. Sister Valerie 
+did not show mercy. The golden spires of the King’s empire have been pulled down 
+into the rising, black ocean, and every noble, prelate, and loyalist has been systematically 
+executed, their bodies left to float in the flooded streets. 
+
+The game screen fades in on the grand throne room of the capital, now completely 
+submerged in two feet of dark, glowing sea water. Valerie sits upon the King’s 
+throne, her jagged red crown dripping with royal blood, her posture unhinged and 
+erratic as she stares down at your remaining crew. 
+
+You have technically survived the journey. Your characters are brought the finest, 
+most decadent foods from the royal vaults and equipped with the highest-tier armory 
+and weapons the kingdom ever possessed. The ship is repaired with gold-leaf timber. 
+But as you sit at her celebratory banquet, listening to her echoing, non-stop 
+laughter bounce off the stone walls, a cold reality sets in. You are alive, but 
+you are no longer men of the sea. You are the vanguard of a new, terrifying aquatic 
+era. You know exactly where your loyalty must stay from this day forward—because 
+the moment your smile slips, or your praise falters, the Drowned Mockery will 
+ensure you join her King at the bottom of the trench.
+================================================================================
