@@ -1,0 +1,214 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+\title{\textbf{Project Roadmap and Task Assignments} \\ \large September -- March (First Demo)}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=General Instructions]
+\textbf{Important Note for Managers:} For all months other than September, Maria-Daria and Goby (Managers) have the following standing rule: \textit{``DEPENDING on demand, managers will have custom tasks.''}
+\end{tcolorbox}
+
+\section*{September Tasks (First Month)}
+
+\subsection*{Managers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Maria-Daria Tompea & 
+\begin{itemize}[leftmargin=*, nosep]
+    \item Create a detailed layout structure of the frontend (Photoshop wireframes and scanned paper layouts) to guide programmers on a 1-to-1 ratio.
+    \item Write the requirements sheet for all animations (1-to-1 matching rules) for the frontend platform.
+    \item Finish the development of the Second Character fully (backstory, states, mechanics).
+    \item Write 5 core scenarios (excluding the specific character scenario) for integration.
+    \item Write the static Introduction page of the game (which remains constant).
+    \item Create the initial 3D character mesh model for the Scavenge sandbox prototype.
+\end{itemize} \\
+\midrule
+Goby (Counselor) & 
+\begin{itemize}[leftmargin=*, nosep]
+    \item Manage communication among people during the project.
+    \item Compose the initial music themes and SFX tracks.
+    \item Create social media and a dedicated YouTube channel to showcase music previews and teasers, promoting these two.
+\end{itemize} \\
+\bottomrule
+\end{tabularx}
+
+\subsection*{Programmers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Denny & Work on the 3D scavenging part (September/October/November) as he is managing that part (so give him less/no other tasks because this is already huge). \\
+\midrule
+Tere & (No tasks assigned for September) \\
+\midrule
+TinyTim (Stefi) & (No tasks assigned for September) \\
+\midrule
+Uninspired Guy & (No tasks assigned for September) \\
+\midrule
+VibeswithMLK (Malak) & (No tasks assigned for September) \\
+\bottomrule
+\end{tabularx}
+
+\newpage
+\subsection*{Designers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Reka \& Viki & Do 4 characters, and the map for scavenging with the structure demanded on GitHub, where you can see exactly how the characters need to look. \\
+\bottomrule
+\end{tabularx}
+
+\vspace{0.5cm}
+\noindent\textbf{Welcome, designers! Are you ready to start creating your characters?} \\
+To make it easier for programmers to understand and know exactly which assets to integrate without sorting through unorganized files, please follow these guidelines when uploading your work to GitHub:
+
+\begin{itemize}[leftmargin=*, nosep]
+    \item \textbf{A. Folder Structure \& Status Tracking}
+    \begin{itemize}
+        \item Create a folder in the CHARACTERS directory named after your producer name.
+        \item Inside it, add a file named \texttt{00\_CURRENT}. Update \texttt{00\_CURRENT} every time you work on something so that programmers and the manager can track your progress. Simply state what you are working on, which file it is in, and if you have finalized anything that should be verified this week.
+        \item Inside your producer folder, add a separate subfolder for each character. Use the character's name as the folder name.
+        \item Use the following naming suffixes to indicate the character's status:
+        \begin{itemize}
+            \item In-Progress: Append \texttt{\_DEMO} to the folder name (e.g., \texttt{CharacterName\_DEMO}).
+            \item Ready for Review: Append \texttt{\_UNVERIFIED} (e.g., \texttt{CharacterName\_UNVERIFIED}).
+            \item Approved: Once approved, the manager will rename the folder to \texttt{0\_[CHARACTER NAME]}.
+        \end{itemize}
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{B. Required Character Folder Contents:} Inside each character's folder, you must create the following items:
+    \begin{enumerate}
+        \item A text file named \texttt{description.txt} detailing: Origin, general backstory, important gameplay mechanics, unlock conditions, and any other relevant details.
+        \item A background image [screenshot] used when viewing the character in the Collection tab.
+        \item All chibi states [screenshot] of the character: normally around 5 states (or 4 if immune to tiredness/sickness with duplicates).
+        \item A folder containing all source PNG assets from the drawing application or browser tool you used.
+        \item \textbf{Scenario Path} (Only required if the character is not unlocked at the start of the game):
+        \begin{itemize}
+            \item Talk to the manager for more information.
+            \item Keep scenario paths concise unless the character has extensive lore. Maximum 7 steps: Easy ($\sim$3 steps), Medium ($\sim$5 steps), Hard ($\sim$7 steps).
+            \item \textit{Scenario Flow Format:} SCENARIO START: Story 1 (no item required) $\rightarrow$ Story 2 (Requires YES/NO or specific item) $\rightarrow$ Story 3 \dots $\rightarrow$ Story 7 (Unlock the character).
+        \end{itemize}
+    \end{enumerate}
+    \vspace{0.2cm}
+    \item \textbf{References \& Examples:}
+    \begin{itemize}
+        \item Please read \texttt{60SECONDS2.0/CHARACTERS/00\_HOW TO MANAGE YOUR FILES IN CHARACTERS/ATTENTION.txt} to understand what to draw and write for characters.
+        \item Example folder: \texttt{60SECONDS2.0/CHARACTERS/MOTHER/VALERIE\_UNVERIFIED/} (Warning: this is for a high difficulty character. Most characters need fewer skills, interactions, and shorter scenarios).
+    \end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{THE MAP:} When sending a character to scavenge, we select a position on the map giving different items by region/rarity. The map must AT LEAST INCLUDE: water, sea, ice island, nature, jungle, forests, castles, ports, pirate caves, pirate islands, volcano, a few empires, royals the humans, underseas caves with siren empire, other skull abandoned undersea items, a volcano with a demonic castle. Add other elements and discuss continent/place names with managers after drawing the map.
+\end{itemize}
+
+
+\newpage
+\section*{October Tasks}
+
+\subsection*{Managers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Maria-Daria \& Goby & DEPENDING on demand, managers will have custom tasks. \\
+\bottomrule
+\end{tabularx}
+
+\subsection*{Programmers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Denny & Work on the 3D scavenging part. \\
+\midrule
+VibeswithMLK (Malak) & Since she is in her first year, assign her the easiest database or backend tasks that can be done easier and do not require prior experience. \\
+\midrule
+Tere, TinyTim (Stefi), & Give tasks in backend all functions and frontend in the survival game, \textbf{BUT NOT the menu or intro page} (as the menu/intro page are excluded from their scope). \\
+Uninspired Guy & \\
+\bottomrule
+\end{tabularx}
+
+\subsection*{Designers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Reka \& Viki & Draw environmental assets (Occult Table, items, boat, notebook, pirate ship) and continue character states. Prepare 6 characters before November for testing, and write at least 30 plots with at least 3 interactions (Start-Medium-End of scenario) before November. \\
+\bottomrule
+\end{tabularx}
+
+
+\vspace{1cm}
+\section*{November Tasks}
+
+\subsection*{Managers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Maria-Daria \& Goby & DEPENDING on demand, managers will have custom tasks. \\
+\bottomrule
+\end{tabularx}
+
+\subsection*{Programmers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Denny & Work on the 3D scavenging part. \\
+\midrule
+VibeswithMLK (Malak) & Assign her the easiest database or backend tasks that can be done easier and do not require prior experience. \\
+\midrule
+Tere, TinyTim (Stefi), & Give tasks in backend all functions and frontend in the survival game, \textbf{BUT NOT the menu or intro page}. \\
+Uninspired Guy & \\
+\bottomrule
+\end{tabularx}
+
+\subsection*{Designers}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Assignee} & \textbf{Tasks} \\
+\midrule
+Reka \& Viki & Draw environmental assets (Occult Table, items, boat, notebook, pirate ship) and continue character states. Prepare 6 characters before November for testing, and write at least 30 plots with at least 3 interactions (Start-Medium-End of scenario) before November. \\
+\bottomrule
+\end{tabularx}
+
+
+\newpage
+\section*{December -- March Roadmap (First Demo Milestones)}
+
+\subsection*{December}
+\begin{itemize}
+    \item \textbf{Milestones:} Save/load game database integration, Goby's music loops and SFX tracks binding.
+    \item \textbf{Managers:} DEPENDING on demand, managers will have custom tasks.
+\end{itemize}
+
+\subsection*{January}
+\begin{itemize}
+    \item \textbf{Milestones:} Metabolic balance tuning, tutorial completion.
+    \item \textbf{Managers:} DEPENDING on demand, managers will have custom tasks.
+\end{itemize}
+
+\subsection*{February}
+\begin{itemize}
+    \item \textbf{Milestones:} UI polish, button animations, closed beta testing.
+    \item \textbf{Managers:} DEPENDING on demand, managers will have custom tasks.
+\end{itemize}
+
+\subsection*{March}
+\begin{itemize}
+    \item \textbf{Milestones:} First Demo sign-off and static web hosting deployment.
+    \item \textbf{Managers:} DEPENDING on demand, managers will have custom tasks.
+\end{itemize}
+
+\end{document}
