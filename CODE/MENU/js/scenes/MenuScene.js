@@ -33,6 +33,9 @@ export class MenuScene {
 
         // Elapsed time since scene started (for entrance animations)
         this.elapsedTime = 0;
+
+        // Track last mouse position for dragging direction
+        this.lastMouseX = 0;
     }
 
     /* ----------------------------------------------------------
@@ -76,10 +79,45 @@ export class MenuScene {
         this.elapsedTime += dt;
         this.input.updateHoldTime(dt);
 
-        // Update all components
-        this.ocean.update(dt, this.input);
-        this.helm.update(dt);
+        const maxScrollX = this.ocean.imageW - this.ocean.displayW;
+        const helmRange = this.helm.maxX - this.helm.minX;
 
+        // Check if the user is dragging the background
+        if (this.ocean.isDragging) {
+            // 1. DRAGGING MODE: Drag drives background scroll, which drives wheel position and rotation
+            this.ocean.update(dt, this.input);
+
+            // Calculate interpolation percentage (0 to 1) based on current scroll position
+            const t = this.ocean.scrollX / maxScrollX;
+
+            // Update wheel position
+            this.helm.wheelCenterX = this.helm.minX + t * helmRange;
+
+            // Make the wheel rotate lock-to-lock (e.g., 4 full rotations over the scroll width)
+            this.helm.wheelAngle = t * (Math.PI * 8);
+
+            // Synchronize the wheel's auto-movement direction so it continues smoothly when released
+            if (this.input.mouseX !== this.lastMouseX) {
+                this.helm.moveDirection = (this.input.mouseX < this.lastMouseX) ? 1 : -1;
+            }
+        } else {
+            // 2. AUTO-PLAY MODE: Wheel slides horizontally, rotating in sync and driving background scroll
+            this.helm.update(dt);
+
+            // Calculate interpolation percentage based on wheel position
+            const t = (this.helm.wheelCenterX - this.helm.minX) / helmRange;
+
+            // Set ocean scroll position
+            this.ocean.scrollX = t * maxScrollX;
+
+            // Update the ocean input tracking so it can detect clicks to start dragging
+            this.ocean.update(dt, this.input);
+        }
+
+        // Store last mouse position for drag direction tracking
+        this.lastMouseX = this.input.mouseX;
+
+        // Update menu buttons
         for (const btn of this.buttons) {
             btn.update(dt, this.input, this.elapsedTime);
         }

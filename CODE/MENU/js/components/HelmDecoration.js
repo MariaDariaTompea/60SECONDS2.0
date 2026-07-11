@@ -18,30 +18,42 @@ export class HelmDecoration {
         this.boardX = 0;
         this.boardY = Game.HEIGHT - this.boardH;  // bottom edge
 
-        // Steering wheel — centered on the board, slightly above it
+        // Steering wheel — slides horizontally across the board
         this.wheelSize = 240;
-        this.wheelCenterX = Game.WIDTH / 2;        // centered horizontally
+        this.minX = 200;                           // left limit
+        this.maxX = Game.WIDTH - 200;              // right limit (1720)
+        this.wheelCenterX = this.minX;             // start on the left
         this.wheelCenterY = this.boardY - 20;      // sits on top of the board
 
-        // Wheel rotation
-        this.wheelAngle = 0;                   // current angle in radians
-        this.wheelSpeed = 0.15;                // radians per second (slow, ambient)
+        // Wheel movement
+        this.moveSpeed = 80;                      // pixels per second
+        this.moveDirection = 1;                    // 1 = moving right, -1 = moving left
 
-        // Subtle wave-like oscillation for the wheel
-        this.oscillationTime = 0;
+        // Wheel rotation
+        this.wheelAngle = 0;                       // current angle in radians
+        this.rotationSpeed = 0.8;                  // speed of rotation
     }
 
     /* ----------------------------------------------------------
-       Update — Rotate the wheel
+       Update — Move and rotate the wheel
        ---------------------------------------------------------- */
 
     update(dt) {
-        this.oscillationTime += dt;
+        // Move the wheel horizontally
+        this.wheelCenterX += this.moveSpeed * this.moveDirection * dt;
 
-        // Slow rotation with a wave-like oscillation (like a ship swaying)
-        // The wheel rocks back and forth rather than spinning full circles
-        this.wheelAngle = Math.sin(this.oscillationTime * this.wheelSpeed * 2) * 0.3
-                        + Math.sin(this.oscillationTime * this.wheelSpeed * 0.7) * 0.15;
+        // Check boundaries and reverse direction
+        if (this.moveDirection === 1 && this.wheelCenterX >= this.maxX) {
+            this.wheelCenterX = this.maxX;
+            this.moveDirection = -1; // head back left
+        } else if (this.moveDirection === -1 && this.wheelCenterX <= this.minX) {
+            this.wheelCenterX = this.minX;
+            this.moveDirection = 1;  // head back right
+        }
+
+        // Rotate the wheel based on movement direction
+        // Clockwise (positive angle increase) when moving right, Counter-clockwise when moving left
+        this.wheelAngle += this.rotationSpeed * this.moveDirection * dt;
     }
 
     /* ----------------------------------------------------------

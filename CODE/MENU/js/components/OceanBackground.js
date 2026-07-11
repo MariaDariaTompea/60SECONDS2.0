@@ -40,8 +40,8 @@ export class OceanBackground {
        ---------------------------------------------------------- */
 
     update(dt, input) {
-        // Auto-scroll
-        this.scrollX += this.autoScrollSpeed * dt;
+        // Auto-scroll (disabled - handled by MenuScene / Helm sync)
+        // this.scrollX += this.autoScrollSpeed * dt;
 
         // Handle drag to "look around"
         if (input.mouseDown && input.isMouseOver(this.displayX, this.displayY, this.displayW, this.displayH)) {
@@ -59,9 +59,10 @@ export class OceanBackground {
             this.isDragging = false;
         }
 
-        // Wrap scroll (seamless loop)
-        if (this.scrollX < 0) this.scrollX += this.imageW;
-        if (this.scrollX >= this.imageW) this.scrollX -= this.imageW;
+        // Clamp scroll within image limits (no infinite looping)
+        const maxScrollX = this.imageW - this.displayW;
+        if (this.scrollX < 0) this.scrollX = 0;
+        if (this.scrollX > maxScrollX) this.scrollX = maxScrollX;
     }
 
     /* ----------------------------------------------------------
