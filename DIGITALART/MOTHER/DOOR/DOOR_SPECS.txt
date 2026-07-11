@@ -1,0 +1,48 @@
+============================================================
+  DOOR ANIMATION SPECIFICATIONS — 60Seconds 2.0
+  (The two doors that close and reveal the menu)
+============================================================
+
+GAME CANVAS:  1920 x 1080 px  (16:9)
+
+─────────────────────────────────────────────────────────────
+DOOR CANVAS SIZE (for drawing):
+
+  Full canvas:  1920 x 1080 px
+
+  You will draw TWO HALVES in this canvas:
+
+  TOP DOOR (upper half):
+    Area:  1920 x 580 px   (from Y=0 to Y=580)
+
+  BOTTOM DOOR (lower half):
+    Area:  1920 x 580 px   (from Y=500 to Y=1080)
+
+  ⚠ NOTE: The top door extends 80px BELOW the midpoint (540)
+    and the bottom door starts 40px ABOVE the midpoint (500).
+    This creates a slight OVERLAP zone (500–580) so the top
+    door sits slightly above the bottom door when they meet.
+
+─────────────────────────────────────────────────────────────
+HOW THE ANIMATION WORKS:
+
+  1. Top door slides DOWN from above the screen → stops at center
+  2. Bottom door slides UP from below the screen → stops at center
+  3. They overlap for ~1 second (top door in front)
+  4. Then they slide apart — top goes UP, bottom goes DOWN
+  5. Behind them: the full menu is revealed
+
+─────────────────────────────────────────────────────────────
+DELIVERY:
+
+  Send TWO separate files:
+    door_top.png     →  the upper door half  (1920 × 580)
+    door_bottom.png  →  the lower door half  (1920 × 580)
+
+  OR one full canvas (1920 × 1080) and I'll split them.
+
+─────────────────────────────────────────────────────────────
+FILE FORMAT:   PNG (can have transparency at edges if desired)
+COLOR MODE:    sRGB
+DPI:           72 (screen)
+============================================================

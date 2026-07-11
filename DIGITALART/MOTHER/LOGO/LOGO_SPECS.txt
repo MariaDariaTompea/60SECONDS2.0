@@ -1,0 +1,34 @@
+============================================================
+  LOGO SPECIFICATIONS — 60Seconds 2.0
+============================================================
+
+GAME CANVAS:  1920 x 1080 px  (16:9)
+
+─────────────────────────────────────────────────────────────
+LOGO CANVAS SIZE:
+
+  Width:  520 px
+  Height: 260 px
+
+  Position on screen: TOP-LEFT corner of the inner area
+  (inside the decorative border).
+
+  Approximate placement:
+    X: 80 px  (from left edge of inner area)
+    Y: 60 px  (from top edge of inner area)
+
+─────────────────────────────────────────────────────────────
+NOTES:
+
+  - Draw the logo inside this 520×260 canvas.
+  - Leave the interior empty for now — just send the
+    canvas when ready.
+  - Transparent background (PNG, 32-bit RGBA).
+  - The logo sits ABOVE the 5 menu buttons.
+
+─────────────────────────────────────────────────────────────
+FILE:          logo.png
+FILE FORMAT:   PNG with transparency (32-bit RGBA)
+COLOR MODE:    sRGB
+DPI:           72 (screen)
+============================================================

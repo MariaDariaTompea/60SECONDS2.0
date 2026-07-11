@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>60 Seconds 2.0</title>
+    <link rel="stylesheet" href="css/menu.css">
+    <!-- Google Fonts: Pirata One (nautical/pirate theme) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+    <!-- On-screen error reporting for easy debugging -->
+    <script>
+        window.addEventListener('error', function(e) {
+            var div = document.createElement('div');
+            div.style.position = 'fixed';
+            div.style.top = '0';
+            div.style.left = '0';
+            div.style.width = '100%';
+            div.style.background = 'rgba(255, 0, 0, 0.95)';
+            div.style.color = '#fff';
+            div.style.padding = '20px';
+            div.style.fontFamily = 'monospace';
+            div.style.zIndex = '9999';
+            div.style.fontSize = '16px';
+            div.style.whiteSpace = 'pre-wrap';
+            div.innerText = 'JS Error: ' + e.message + '\nFile: ' + e.filename + ' (Line: ' + e.lineno + ')\nStack:\n' + (e.error ? e.error.stack : 'N/A');
+            document.body.appendChild(div);
+        });
+        window.addEventListener('unhandledrejection', function(e) {
+            var div = document.createElement('div');
+            div.style.position = 'fixed';
+            div.style.top = '0';
+            div.style.left = '0';
+            div.style.width = '100%';
+            div.style.background = 'rgba(255, 0, 0, 0.95)';
+            div.style.color = '#fff';
+            div.style.padding = '20px';
+            div.style.fontFamily = 'monospace';
+            div.style.zIndex = '9999';
+            div.style.fontSize = '16px';
+            div.style.whiteSpace = 'pre-wrap';
+            div.innerText = 'Unhandled Rejection: ' + e.reason + '\nStack:\n' + (e.reason && e.reason.stack ? e.reason.stack : 'N/A');
+            document.body.appendChild(div);
+        });
+    </script>
+</head>
+<body>
+    <canvas id="gameCanvas" width="1920" height="1080"></canvas>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

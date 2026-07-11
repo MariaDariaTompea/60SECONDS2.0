@@ -1,0 +1,244 @@
+/* ============================================================
+   MenuScene.js — Main Menu Screen
+   Similar to Unity's main menu scene with UI Canvas
+   
+   Layout (matches the sketch):
+   - Ocean loop background (fills inner area, scrolls)
+   - Decorative border frame (48px, empty/transparent)
+   - Logo (top-left, 520×260)
+   - 5 menu buttons (stacked left side)
+   - Helm board + rotating wheel (top, above border)
+   ============================================================ */
+
+import { Game } from '../Game.js';
+import { AssetManager } from '../AssetManager.js';
+import { OceanBackground } from '../components/OceanBackground.js';
+import { HelmDecoration } from '../components/HelmDecoration.js';
+import { MenuButton } from '../components/MenuButton.js';
+
+export class MenuScene {
+    constructor() {
+        this.game = null;
+        this.ctx = null;
+        this.input = null;
+
+        // Layout constants
+        this.BORDER = 48;
+
+        // Components (like Unity GameObjects)
+        this.ocean = new OceanBackground();
+        this.helm = new HelmDecoration();
+        this.buttons = [];
+        this.logoImage = null; // loaded from AssetManager
+
+        // Elapsed time since scene started (for entrance animations)
+        this.elapsedTime = 0;
+    }
+
+    /* ----------------------------------------------------------
+       Lifecycle
+       ---------------------------------------------------------- */
+
+    enter() {
+        this.elapsedTime = 0;
+
+        // Create the 5 menu buttons (matching the sketch layout)
+        const startX = this.BORDER + 30;     // left side, inside border
+        const startY = 350;                   // below the logo
+        const gap = 32;                       // vertical gap between buttons
+        const buttonH = 80;                   // matches MenuButton.height
+
+        const buttonDefs = [
+            { label: 'NEW GAME',    asset: 'btn_new_game',   action: () => this._onNewGame() },
+            { label: 'LOAD GAME',   asset: 'btn_load_game',  action: () => this._onLoadGame() },
+            { label: 'COLLECTION',  asset: 'btn_collection', action: () => this._onCollection() },
+            { label: 'SETTINGS',    asset: 'btn_settings',   action: () => this._onSettings() },
+            { label: 'EXIT',        asset: 'btn_exit',       action: () => this._onExit() },
+        ];
+
+        this.buttons = buttonDefs.map((def, i) => {
+            const y = startY + i * (buttonH + gap);
+            return new MenuButton(def.label, def.asset, startX, y, i, def.action);
+        });
+
+        console.log('[MenuScene] Enter — menu ready');
+    }
+
+    exit() {
+        console.log('[MenuScene] Exit');
+    }
+
+    /* ----------------------------------------------------------
+       Update
+       ---------------------------------------------------------- */
+
+    update(dt) {
+        this.elapsedTime += dt;
+        this.input.updateHoldTime(dt);
+
+        // Update all components
+        this.ocean.update(dt, this.input);
+        this.helm.update(dt);
+
+        for (const btn of this.buttons) {
+            btn.update(dt, this.input, this.elapsedTime);
+        }
+    }
+
+    /* ----------------------------------------------------------
+       Render — Layer order matters (back to front)
+       ---------------------------------------------------------- */
+
+    render(ctx) {
+        const W = Game.WIDTH;
+        const H = Game.HEIGHT;
+
+        // 1. Clear to dark background
+        ctx.fillStyle = '#0a0e1a';
+        ctx.fillRect(0, 0, W, H);
+
+        // 2. Ocean background (inside the border area)
+        this.ocean.render(ctx);
+
+        // 3. Decorative border frame
+        this._renderBorder(ctx, W, H);
+
+        // 4. Logo (top-left inside border)
+        this._renderLogo(ctx);
+
+        // 5. Menu buttons
+        for (const btn of this.buttons) {
+            btn.render(ctx);
+        }
+
+        // 6. Helm decoration (on top of everything)
+        this.helm.render(ctx);
+    }
+
+    /* ----------------------------------------------------------
+       Border Frame
+       The green border from the sketch — an empty frame around
+       the inner game area
+       ---------------------------------------------------------- */
+
+    _renderBorder(ctx, W, H) {
+        const B = this.BORDER;
+
+        // Outer edge of border
+        ctx.strokeStyle = '#2a5a2a';  // dark green (from sketch)
+        ctx.lineWidth = 4;
+
+        // Draw the border as 4 rectangles (top, bottom, left, right)
+        // This leaves the interior open for the ocean
+
+        // Top border bar
+        const topGrad = ctx.createLinearGradient(0, 0, 0, B);
+        topGrad.addColorStop(0, '#1a3a1a');
+        topGrad.addColorStop(0.5, '#2d5a2d');
+        topGrad.addColorStop(1, '#1a3a1a');
+        ctx.fillStyle = topGrad;
+        ctx.fillRect(0, 0, W, B);
+
+        // Bottom border bar
+        ctx.fillRect(0, H - B, W, B);
+
+        // Left border bar
+        const sideGrad = ctx.createLinearGradient(0, 0, B, 0);
+        sideGrad.addColorStop(0, '#1a3a1a');
+        sideGrad.addColorStop(0.5, '#2d5a2d');
+        sideGrad.addColorStop(1, '#1a3a1a');
+        ctx.fillStyle = sideGrad;
+        ctx.fillRect(0, B, B, H - B * 2);
+
+        // Right border bar
+        ctx.fillRect(W - B, B, B, H - B * 2);
+
+        // Inner border line (gold/brass to contrast)
+        ctx.strokeStyle = 'rgba(180, 150, 80, 0.5)';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(B, B, W - B * 2, H - B * 2);
+
+        // Outer border line
+        ctx.strokeStyle = 'rgba(100, 160, 100, 0.6)';
+        ctx.lineWidth = 3;
+        ctx.strokeRect(2, 2, W - 4, H - 4);
+
+        // Corner accents (like rivets/bolts)
+        ctx.fillStyle = '#8a8a6a';
+        const corners = [
+            [B / 2, B / 2],
+            [W - B / 2, B / 2],
+            [B / 2, H - B / 2],
+            [W - B / 2, H - B / 2],
+        ];
+        for (const [cx, cy] of corners) {
+            ctx.beginPath();
+            ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#666';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+    }
+
+    /* ----------------------------------------------------------
+       Logo (top-left corner)
+       ---------------------------------------------------------- */
+
+    _renderLogo(ctx) {
+        const img = AssetManager.get('logo');
+        const logoX = this.BORDER + 30;
+        const logoY = this.BORDER + 20;
+        const logoW = 520;
+        const logoH = 260;
+
+        if (img) {
+            ctx.drawImage(img, logoX, logoY, logoW, logoH);
+        } else {
+            // Placeholder logo
+            AssetManager.drawPlaceholder(ctx, logoX, logoY, logoW, logoH, '#cc7700', 'LOGO (520×260)');
+
+            // Draw temp title in the placeholder
+            ctx.save();
+            ctx.fillStyle = '#f4c430';
+            ctx.font = 'bold 64px "Pirata One", serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            ctx.shadowBlur = 8;
+            ctx.fillText('60 SEC', logoX + logoW / 2, logoY + logoH / 2 - 15);
+            ctx.font = 'bold 36px "Cinzel Decorative", serif';
+            ctx.fillText('2.0', logoX + logoW / 2, logoY + logoH / 2 + 40);
+            ctx.restore();
+        }
+    }
+
+    /* ----------------------------------------------------------
+       Button Actions (stubs — to be wired to game logic)
+       ---------------------------------------------------------- */
+
+    _onNewGame() {
+        console.log('[Menu] NEW GAME clicked');
+        // TODO: Transition to game start
+    }
+
+    _onLoadGame() {
+        console.log('[Menu] LOAD GAME clicked');
+        // TODO: Open save file browser
+    }
+
+    _onCollection() {
+        console.log('[Menu] COLLECTION clicked');
+        // TODO: Open collection screen
+    }
+
+    _onSettings() {
+        console.log('[Menu] SETTINGS clicked');
+        // TODO: Open settings panel
+    }
+
+    _onExit() {
+        console.log('[Menu] EXIT clicked');
+        // TODO: Close game / confirm exit
+    }
+}

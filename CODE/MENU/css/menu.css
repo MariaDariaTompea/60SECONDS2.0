@@ -1,0 +1,28 @@
+/* ============================================================
+   60 Seconds 2.0 — Menu Styles
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameCanvas {
+    /* The canvas is 1920×1080 internally.
+       CSS scales it to fit the viewport while keeping 16:9 ratio.
+       JavaScript in Game.js handles the dynamic sizing. */
+    display: block;
+    background: #000;
+    image-rendering: auto; /* smooth scaling */
+}

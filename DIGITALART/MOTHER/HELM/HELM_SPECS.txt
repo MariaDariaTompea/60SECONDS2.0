@@ -1,0 +1,55 @@
+============================================================
+  SHIP HELM SPECIFICATIONS — 60Seconds 2.0
+  (The steering wheel + railing area at the top of screen)
+============================================================
+
+  "Helm" = the ship's steering station.
+  In nautical terms:
+    - The WHEEL (roata) = the steering wheel
+    - The HELM BOARD (bordul) = the wooden railing / dashboard
+      where the wheel is mounted
+
+GAME CANVAS:  1920 x 1080 px  (16:9)
+
+─────────────────────────────────────────────────────────────
+ELEMENT 1 — HELM BOARD (the railing / dashboard bar)
+
+  Max Width:   1920 px   (spans the full screen width)
+  Max Height:  180 px
+
+  This is the wooden railing / ship board that sits at the
+  very top of the screen, ABOVE the decorative border.
+  Draw it as a horizontal wooden plank / railing.
+
+  FILE:  helm_board.png  (transparent PNG)
+
+─────────────────────────────────────────────────────────────
+ELEMENT 2 — STEERING WHEEL (roata / manivela)
+
+  Max Width:   240 px
+  Max Height:  240 px
+
+  This is the ship's steering wheel. It will be drawn as a
+  SEPARATE element so the code can ROTATE it continuously
+  (like the ocean waves — slow, rhythmic rotation).
+
+  The wheel should be centered on its canvas so rotation
+  looks correct (center of wheel = center of 240×240 canvas).
+
+  FILE:  helm_wheel.png  (transparent PNG)
+
+─────────────────────────────────────────────────────────────
+PLACEMENT:
+
+  The helm board sits at the very top of the screen (Y: 0).
+  The wheel is positioned centered horizontally on the board,
+  overlapping it slightly:
+
+    Wheel center X:  ~960 px  (center of screen)
+    Wheel center Y:  ~120 px  (overlapping bottom of board)
+
+─────────────────────────────────────────────────────────────
+FILE FORMAT:   PNG with transparency (32-bit RGBA)
+COLOR MODE:    sRGB
+DPI:           72 (screen)
+============================================================

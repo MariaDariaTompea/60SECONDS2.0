@@ -1,0 +1,57 @@
+============================================================
+  MENU BUTTON SPECIFICATIONS — 60Seconds 2.0
+============================================================
+
+GAME CANVAS:  1920 x 1080 px  (16:9, standard Steam resolution)
+
+─────────────────────────────────────────────────────────────
+BUTTON CANVAS SIZE (same for ALL 5 buttons):
+
+  Width:  500 px
+  Height: 140 px
+
+  This gives you ~75 px of padding on each side and ~30 px
+  top/bottom for decorative details (octopus tentacles, etc.)
+
+  The actual clickable / visible button shape should be
+  roughly centered inside this canvas:
+
+  Inner button area (suggestion):
+    Width:  ~350 px
+    Height: ~80 px
+    (centered within the 500×140 canvas)
+
+─────────────────────────────────────────────────────────────
+BUTTONS LIST (draw each as a separate PNG, transparent bg):
+
+  1. NEW GAME      →  new_game.png
+  2. LOAD GAME     →  load_game.png
+  3. COLLECTION    →  collection.png
+  4. SETTINGS      →  settings.png
+  5. EXIT          →  exit.png
+
+─────────────────────────────────────────────────────────────
+FONT RECOMMENDATION:
+
+  Primary:   "Pirata One"  (Google Fonts — free, nautical/pirate style)
+  Fallback:  "Cinzel Decorative" or "MedievalSharp"
+
+  The text will be rendered via code on top of your button art,
+  so you do NOT need to draw the text — only the button shape
+  and decorations.
+
+─────────────────────────────────────────────────────────────
+LAYOUT ON SCREEN:
+
+  Buttons are stacked vertically on the LEFT side of the screen.
+  Top of first button starts at approximately Y = 300 px.
+  Vertical gap between buttons: ~24 px.
+
+  Total vertical span of 5 buttons:
+    5 × 140 + 4 × 24 = 796 px  (fits within 1080 inner area)
+
+─────────────────────────────────────────────────────────────
+FILE FORMAT:   PNG with transparency (32-bit RGBA)
+COLOR MODE:    sRGB
+DPI:           72 (screen)
+============================================================

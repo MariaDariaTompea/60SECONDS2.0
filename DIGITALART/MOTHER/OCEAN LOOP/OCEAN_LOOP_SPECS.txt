@@ -1,0 +1,35 @@
+============================================================
+  OCEAN LOOP IMAGE SPECIFICATIONS — 60Seconds 2.0
+============================================================
+
+GAME CANVAS:       1920 x 1080 px  (16:9)
+BORDER THICKNESS:  48 px on each side
+INNER AREA:        1824 x 984 px
+
+─────────────────────────────────────────────────────────────
+OCEAN LOOP CANVAS SIZE:
+
+  Width:  5472 px   (3× the inner width, for smooth seamless loop)
+  Height: 984 px    (matches inner area height exactly)
+
+─────────────────────────────────────────────────────────────
+NOTES:
+
+  - This is a SEAMLESS HORIZONTAL LOOP image.
+  - The left edge must blend perfectly into the right edge
+    so it can scroll infinitely left↔right.
+  - Think of it as the view from a ship — open ocean,
+    waves, horizon, sky.
+  - The image scrolls very slowly from left to right
+    behind the menu elements.
+  - You can also drag/pan left and right to "look around"
+    as if standing on the ship deck.
+  - The entire inner area (behind logo, buttons, etc.)
+    shows this image as background.
+
+─────────────────────────────────────────────────────────────
+FILE:          ocean_loop.png
+FILE FORMAT:   PNG or JPG (no transparency needed)
+COLOR MODE:    sRGB
+DPI:           72 (screen)
+============================================================
