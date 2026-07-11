@@ -100,7 +100,7 @@ Below is the state flow diagram of the menu start-up sequence:
 3.  **`MenuScene.js`**: The main menu canvas. Arranges the border, the logo, the buttons, and delegates update/render ticks to active UI components.
 
 ### UI Components (`js/components/`)
-*   **`MenuButton.js`**: Resizable arrow button (**380×80px**). Interpolates hover sliding animations, hold-down click feedback, and light glow shaders.
+*   **`MenuButton.js`**: Resizable arrow button (**450×95px**). Interpolates hover sliding animations, hold-down click feedback, and light glow shaders.
 *   **`OceanBackground.js`**: Horizontal parallax ocean panorama. Scrolls automatically and supports mouse click-and-drag panning.
 *   **`HelmDecoration.js`**: Sits at the bottom of the screen. Animates the wood railing and uses wave-based oscillation to rock the helm wheel.
 
@@ -113,11 +113,11 @@ To replace the colored layouts with final graphics, save your PNGs into the foll
 | Component | Target File | Dimensions | Details |
 | :--- | :--- | :--- | :--- |
 | **Logo** | `assets/logo/logo.png` | 520 × 260 px | Game logo |
-| **New Game Button** | `assets/menu_buttons/new_game.png` | 380 × 80 px | Tentacle style button |
-| **Load Game Button** | `assets/menu_buttons/load_game.png` | 380 × 80 px | Tentacle style button |
-| **Collection Button** | `assets/menu_buttons/collection.png` | 380 × 80 px | Tentacle style button |
-| **Settings Button** | `assets/menu_buttons/settings.png` | 380 × 80 px | Tentacle style button |
-| **Exit Button** | `assets/menu_buttons/exit.png` | 380 × 80 px | Tentacle style button |
+| **New Game Button** | `assets/menu_buttons/new_game.png` | **900 × 190 px** *(2x detail)* | Tentacle style button (renders at 450×95px) |
+| **Load Game Button** | `assets/menu_buttons/load_game.png` | **900 × 190 px** *(2x detail)* | Tentacle style button (renders at 450×95px) |
+| **Collection Button** | `assets/menu_buttons/collection.png` | **900 × 190 px** *(2x detail)* | Tentacle style button (renders at 450×95px) |
+| **Settings Button** | `assets/menu_buttons/settings.png` | **900 × 190 px** *(2x detail)* | Tentacle style button (renders at 450×95px) |
+| **Exit Button** | `assets/menu_buttons/exit.png` | **900 × 190 px** *(2x detail)* | Tentacle style button (renders at 450×95px) |
 | **Ocean Loop** | `assets/ocean_loop/ocean_loop.png` | 5472 × 984 px | Seamless horizontal loop |
 | **Helm Board** | `assets/helm/helm_board.png` | 1920 × 180 px | Bottom deck railing |
 | **Helm Wheel** | `assets/helm/helm_wheel.png` | 240 × 240 px | Steering wheel |

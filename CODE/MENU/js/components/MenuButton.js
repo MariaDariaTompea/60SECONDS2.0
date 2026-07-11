@@ -28,9 +28,9 @@ export class MenuButton {
         this.index = index;
         this.onClick = onClick;
 
-        // Button size — spacious and readable
-        this.width = 380;
-        this.height = 80;
+        // Button size — scaled up physically for better details and visibility
+        this.width = 450;
+        this.height = 95;
 
         // Current animation offsets
         this.slideOffset = 0;   // horizontal slide on hover
@@ -159,8 +159,8 @@ export class MenuButton {
        ---------------------------------------------------------- */
 
     _drawPlaceholder(ctx, x, y, w, h) {
-        const padding = 10;
-        const arrowTip = 24;
+        const padding = 12;
+        const arrowTip = 28;
 
         // Pentagon shape (pointed on the right)
         const px = x + padding;
@@ -194,7 +194,7 @@ export class MenuButton {
 
         // Border
         ctx.strokeStyle = '#ff8844';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 2.5;
         ctx.stroke();
     }
 
@@ -204,17 +204,17 @@ export class MenuButton {
 
     _drawLabel(ctx, x, y, w, h) {
         ctx.fillStyle = '#fff';
-        ctx.font = '28px "Pirata One", "Cinzel Decorative", Georgia, serif';
+        ctx.font = '32px "Pirata One", "Cinzel Decorative", Georgia, serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
         // Text shadow for readability
         ctx.shadowColor = 'rgba(0,0,0,0.8)';
         ctx.shadowBlur = 4;
-        ctx.shadowOffsetX = 1;
-        ctx.shadowOffsetY = 1;
+        ctx.shadowOffsetX = 1.5;
+        ctx.shadowOffsetY = 1.5;
 
-        ctx.fillText(this.label, x + w / 2 - 8, y + h / 2);
+        ctx.fillText(this.label, x + w / 2 - 10, y + h / 2);
 
         ctx.shadowColor = 'transparent';
         ctx.shadowBlur = 0;
