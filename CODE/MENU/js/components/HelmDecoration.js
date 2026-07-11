@@ -18,42 +18,21 @@ export class HelmDecoration {
         this.boardX = 0;
         this.boardY = Game.HEIGHT - this.boardH;  // bottom edge
 
-        // Steering wheel — slides horizontally across the board
+        // Steering wheel — fixed in the center of the board
         this.wheelSize = 240;
-        this.minX = 200;                           // left limit
-        this.maxX = Game.WIDTH - 200;              // right limit (1720)
-        this.wheelCenterX = this.minX;             // start on the left
+        this.wheelCenterX = Game.WIDTH / 2;        // centered horizontally
         this.wheelCenterY = this.boardY - 20;      // sits on top of the board
 
-        // Wheel movement
-        this.moveSpeed = 80;                      // pixels per second
-        this.moveDirection = 1;                    // 1 = moving right, -1 = moving left
-
         // Wheel rotation
-        this.wheelAngle = 0;                       // current angle in radians
-        this.rotationSpeed = 0.8;                  // speed of rotation
+        this.wheelAngle = 0;                       // current angle in radians (driven by MenuScene)
     }
 
     /* ----------------------------------------------------------
-       Update — Move and rotate the wheel
+       Update
        ---------------------------------------------------------- */
 
     update(dt) {
-        // Move the wheel horizontally
-        this.wheelCenterX += this.moveSpeed * this.moveDirection * dt;
-
-        // Check boundaries and reverse direction
-        if (this.moveDirection === 1 && this.wheelCenterX >= this.maxX) {
-            this.wheelCenterX = this.maxX;
-            this.moveDirection = -1; // head back left
-        } else if (this.moveDirection === -1 && this.wheelCenterX <= this.minX) {
-            this.wheelCenterX = this.minX;
-            this.moveDirection = 1;  // head back right
-        }
-
-        // Rotate the wheel based on movement direction
-        // Clockwise (positive angle increase) when moving right, Counter-clockwise when moving left
-        this.wheelAngle += this.rotationSpeed * this.moveDirection * dt;
+        // Position and rotation are driven by MenuScene to sync with ocean background
     }
 
     /* ----------------------------------------------------------
