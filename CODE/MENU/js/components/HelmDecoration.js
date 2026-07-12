@@ -15,13 +15,13 @@ export class HelmDecoration {
         // Helm board dimensions — matches high-resolution 1536x1024 canvas specifications
         this.boardOriginalW = 1536;
         this.boardOriginalH = 1024;
-        this.boardScale = 0.8;                     // proportional scale factor
+        this.boardScale = 0.65;                    // proportional scale factor (to match original size)
 
-        this.boardW = this.boardOriginalW * this.boardScale; // 1228.8px wide
-        this.boardH = this.boardOriginalH * this.boardScale; // 819.2px tall
+        this.boardW = this.boardOriginalW * this.boardScale; // 998.4px wide
+        this.boardH = this.boardOriginalH * this.boardScale; // 665.6px tall
         this.boardX = (Game.WIDTH - this.boardW) / 2;       // centered horizontally
-        // Hide bottom 30% of the canvas off-screen to frame the wooden railing at the bottom
-        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.3); 
+        // Hide bottom 48% of the tall canvas off-screen to position the railing at the bottom
+        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.48); 
 
         // Normalized centroid coordinates for the steering wheel graphic inside the 1536x1024 canvas
         this.centerX = 766.4 / 1536;
@@ -31,6 +31,7 @@ export class HelmDecoration {
         this.wheelCenterX = this.boardX + this.boardW * this.centerX;
         this.wheelCenterY = this.boardY + this.boardH * this.centerY;
         this.wheelSize = 240;                      // for placeholder size fallback
+        this.wheelScaleFactor = 0.65;              // make the wheel smaller relative to the board
 
         // Wheel rotation
         this.wheelAngle = 0;                       // current angle in radians (driven by MenuScene)
@@ -74,15 +75,19 @@ export class HelmDecoration {
             ctx.translate(this.wheelCenterX, this.wheelCenterY);
             ctx.rotate(this.wheelAngle);
 
+            // Scale down the wheel relative to the board
+            const wheelW = this.boardW * this.wheelScaleFactor;
+            const wheelH = this.boardH * this.wheelScaleFactor;
+
             // Draw the full 1536x1024 sheet aligned
-            const rx = this.boardW * this.centerX;
-            const ry = this.boardH * this.centerY;
+            const rx = wheelW * this.centerX;
+            const ry = wheelH * this.centerY;
             ctx.drawImage(
                 img,
                 -rx,
                 -ry,
-                this.boardW,
-                this.boardH
+                wheelW,
+                wheelH
             );
         } else {
             // Placeholder: ship wheel shape
