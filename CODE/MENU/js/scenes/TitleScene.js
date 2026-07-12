@@ -249,7 +249,7 @@ export class TitleScene {
         const pulse = 0.4 + Math.sin(this.elapsedTime * 2.5) * 0.3;
         ctx.globalAlpha = this.subtitleAlpha * pulse;
 
-        ctx.fillStyle = '#aabbcc';
+        ctx.fillStyle = '#f4c430'; // golden yellow to match the logo theme
         ctx.font = '28px "Cinzel Decorative", Georgia, serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -266,7 +266,10 @@ export class TitleScene {
 
         for (const p of this.fireParticles) {
             const lifeRatio = p.life / p.maxLife; // 1 (spawn) to 0 (death)
-            const alpha = lifeRatio * this.titleAlpha;
+            
+            // Fade the fire in quadratically/cubically relative to titleAlpha
+            // This prevents bright particles from shining through the semi-transparent logo during initial fade-in
+            const alpha = lifeRatio * Math.pow(this.titleAlpha, 3.0);
             const size = p.size * (0.4 + 0.6 * lifeRatio); // shrink over time
 
             // Radial gradient for smooth fireballs
