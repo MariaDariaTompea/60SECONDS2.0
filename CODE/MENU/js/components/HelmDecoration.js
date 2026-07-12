@@ -15,23 +15,29 @@ export class HelmDecoration {
         // Helm board dimensions — matches high-resolution 1536x1024 canvas specifications
         this.boardOriginalW = 1536;
         this.boardOriginalH = 1024;
-        this.boardScale = 0.65;                    // proportional scale factor (to match original size)
-
-        this.boardW = this.boardOriginalW * this.boardScale; // 998.4px wide
-        this.boardH = this.boardOriginalH * this.boardScale; // 665.6px tall
+        
+        // We deliberately squish the board vertically (width scale 0.9, height scale 0.52)
+        // to make it look flatter, wider, and not elongated upwards.
+        this.boardW = this.boardOriginalW * 0.9;   // 1382.4px wide (spans screen nicely)
+        this.boardH = this.boardOriginalH * 0.52;  // 532.48px tall (flatter railing profile)
         this.boardX = (Game.WIDTH - this.boardW) / 2;       // centered horizontally
-        // Hide bottom 48% of the tall canvas off-screen to position the railing at the bottom
-        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.48); 
+        // Hide bottom 38% of the board canvas off-screen
+        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.38); 
 
         // Normalized centroid coordinates for the steering wheel graphic inside the 1536x1024 canvas
         this.centerX = 766.4 / 1536;
         this.centerY = 480.7 / 1024;
 
-        // Position of the rotation center of the wheel on the screen
-        this.wheelCenterX = this.boardX + this.boardW * this.centerX;
-        this.wheelCenterY = this.boardY + this.boardH * this.centerY;
+        // Position of the rotation center of the wheel on the screen (moved 90px higher)
+        this.wheelCenterX = Game.WIDTH / 2;
+        this.wheelCenterY = this.boardY + this.boardH * this.centerY - 90;
+        
         this.wheelSize = 240;                      // for placeholder size fallback
-        this.wheelScaleFactor = 0.65;              // make the wheel smaller relative to the board
+        this.wheelScaleFactor = 0.42;              // compact, elegant wheel size (42% of original)
+
+        // Wheel dimensions (keeping perfect 1.5 aspect ratio so wheel stays circular)
+        this.wheelW = this.boardOriginalW * this.wheelScaleFactor;
+        this.wheelH = this.boardOriginalH * this.wheelScaleFactor;
 
         // Wheel rotation
         this.wheelAngle = 0;                       // current angle in radians (driven by MenuScene)
@@ -75,19 +81,15 @@ export class HelmDecoration {
             ctx.translate(this.wheelCenterX, this.wheelCenterY);
             ctx.rotate(this.wheelAngle);
 
-            // Scale down the wheel relative to the board
-            const wheelW = this.boardW * this.wheelScaleFactor;
-            const wheelH = this.boardH * this.wheelScaleFactor;
-
-            // Draw the full 1536x1024 sheet aligned
-            const rx = wheelW * this.centerX;
-            const ry = wheelH * this.centerY;
+            // Draw the full 1536x1024 sheet aligned using precalculated proportions
+            const rx = this.wheelW * this.centerX;
+            const ry = this.wheelH * this.centerY;
             ctx.drawImage(
                 img,
                 -rx,
                 -ry,
-                wheelW,
-                wheelH
+                this.wheelW,
+                this.wheelH
             );
         } else {
             // Placeholder: ship wheel shape
