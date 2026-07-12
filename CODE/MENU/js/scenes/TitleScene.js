@@ -84,20 +84,20 @@ export class TitleScene {
         // --- UPDATE FIRE PARTICLES ---
         // Spawn fire particles once the title logo starts fading in
         if (this.titleAlpha > 0.1) {
-            const spawnCount = 2 + Math.floor(Math.random() * 3); // 2-4 per frame
+            const spawnCount = 3 + Math.floor(Math.random() * 3); // 3-5 per frame (denser fire!)
             const cx = Game.WIDTH / 2;
-            const cy = Game.HEIGHT / 2 - 40; // center of logo
+            const cy = Game.HEIGHT / 2 - 40; // center of logo: y = 500
 
             for (let i = 0; i < spawnCount; i++) {
                 this.fireParticles.push({
-                    x: cx + (Math.random() - 0.5) * 550,       // spread across logo width
-                    y: cy + (Math.random() - 0.2) * 80 + 30,   // spawn along bottom/sides
-                    vx: (Math.random() - 0.5) * 45,           // slight drift
-                    vy: -70 - Math.random() * 100,             // float up
-                    size: 12 + Math.random() * 24,             // size
-                    maxLife: 0.8 + Math.random() * 0.7,        // life duration
-                    life: 0.8 + Math.random() * 0.7,
-                    hue: 18 + Math.random() * 22,              // fire tones (hue 18-40 in HSL)
+                    x: cx + (Math.random() - 0.5) * 600,       // spread across logo width
+                    y: cy + 130 + (Math.random() - 0.5) * 20,  // spawn underneath the logo text
+                    vx: (Math.random() - 0.5) * 50,           // slight horizontal drift
+                    vy: -90 - Math.random() * 120,             // float up quickly
+                    size: 25 + Math.random() * 35,             // larger size
+                    maxLife: 1.0 + Math.random() * 0.8,        // longer life to rise nicely
+                    life: 1.0 + Math.random() * 0.8,
+                    hue: 35 + Math.random() * 20,              // yellow/gold tones (hue 35-55)
                 });
             }
         }

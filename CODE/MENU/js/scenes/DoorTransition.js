@@ -178,22 +178,38 @@ export class DoorTransition {
             }
         }
 
+        // Render vignette shadow overlay (closing in)
+        let vignetteAlpha = 0;
+        if (this.state === DoorState.CLOSING) {
+            vignetteAlpha = Math.min(1, this.stateTime / this.closeDuration);
+        } else if (this.state === DoorState.CLOSED) {
+            vignetteAlpha = 1.0;
+        } else if (this.state === DoorState.OPENING) {
+            vignetteAlpha = 1 - Math.min(1, this.stateTime / this.openDuration);
+        }
+
+        if (vignetteAlpha > 0) {
+            ctx.save();
+            const cx = W / 2;
+            const cy = H / 2;
+            // Radius shrinks as doors close, focusing shadow towards center
+            const startRadius = Math.max(W, H) * 0.95;
+            const targetRadius = Math.max(W, H) * 0.4;
+            const currentRadius = startRadius - (startRadius - targetRadius) * vignetteAlpha;
+
+            const grad = ctx.createRadialGradient(cx, cy, currentRadius * 0.1, cx, cy, currentRadius);
+            grad.addColorStop(0, 'rgba(0, 0, 0, 0)');
+            grad.addColorStop(0.5, `rgba(0, 0, 0, ${vignetteAlpha * 0.5})`);
+            grad.addColorStop(1, `rgba(0, 0, 0, ${vignetteAlpha * 0.98})`);
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, W, H);
+            ctx.restore();
+        }
+
         // Draw doors ON TOP
         this._renderDoor(ctx, 'door_top', 0, this.topDoorY, this.doorW, this.doorH, true);
         this._renderDoor(ctx, 'door_bottom', 0, this.bottomDoorY, this.doorW, this.doorH, false);
-
-        // Seam glow only when doors are almost closed (distance between them < 60px)
-        const doorDistance = this.bottomDoorY - (this.topDoorY + this.doorH);
-        if (doorDistance < 60 && (this.state === DoorState.CLOSING || this.state === DoorState.CLOSED)) {
-            const seamY = (this.topDoorY + this.doorH + this.bottomDoorY) / 2;
-            const intensity = (1 - doorDistance / 60) * 0.25; // fade in as they meet
-            const seamGrad = ctx.createLinearGradient(0, seamY - 20, 0, seamY + 20);
-            seamGrad.addColorStop(0, 'rgba(255, 200, 80, 0)');
-            seamGrad.addColorStop(0.5, `rgba(255, 200, 80, ${intensity})`);
-            seamGrad.addColorStop(1, 'rgba(255, 200, 80, 0)');
-            ctx.fillStyle = seamGrad;
-            ctx.fillRect(0, seamY - 20, W, 40);
-        }
     }
 
     _renderDoor(ctx, assetKey, x, y, w, h, isTop) {
