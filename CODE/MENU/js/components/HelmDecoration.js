@@ -15,7 +15,7 @@ export class HelmDecoration {
         // Helm board dimensions — based on cropped, transparent image (1431x324)
         this.boardOriginalW = 1431;
         this.boardOriginalH = 324;
-        this.boardScale = 0.9;                     // proportional scale factor
+        this.boardScale = 0.8;                     // proportional scale factor (slightly smaller)
 
         this.boardW = this.boardOriginalW * this.boardScale; // 1287px wide
         this.boardH = this.boardOriginalH * this.boardScale; // 291px tall
