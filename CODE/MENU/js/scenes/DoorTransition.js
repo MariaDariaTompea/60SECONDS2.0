@@ -65,6 +65,19 @@ export class DoorTransition {
         this.state = DoorState.CLOSING;
         this.stateTime = 0;
 
+        // Auto-detect custom door asset aspect ratio (1920x580 vs 1920x1080 full screen canvases)
+        const topImg = AssetManager.get('door_top');
+        if (topImg && topImg.naturalHeight === 1080) {
+            this.doorH = 1080;
+            this.topDoorTarget = 0;
+            this.bottomDoorTarget = 0;
+            
+            // Re-align Y starting positions based on 1080 height
+            this.topDoorY = -this.doorH;
+            this.bottomDoorY = Game.HEIGHT;
+            console.log('[DoorTransition] Custom 1920x1080 door assets detected — using full-canvas mode');
+        }
+
         // Initialize the menu scene early so it's ready when doors open
         this.menuScene = new MenuScene();
         this.menuScene.game = this.game;
@@ -216,7 +229,8 @@ export class DoorTransition {
         const img = AssetManager.get(assetKey);
 
         if (img) {
-            ctx.drawImage(img, x, y, w, h);
+            const drawH = img.naturalHeight === 1080 ? 1080 : h;
+            ctx.drawImage(img, x, y, w, drawH);
         } else {
             // Placeholder door
             this._drawPlaceholderDoor(ctx, x, y, w, h, isTop);
