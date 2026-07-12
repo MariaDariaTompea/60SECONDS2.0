@@ -91,7 +91,7 @@ export class TitleScene {
             for (let i = 0; i < spawnCount; i++) {
                 this.fireParticles.push({
                     x: cx + (Math.random() - 0.5) * 600,       // spread across logo width
-                    y: cy + 130 + (Math.random() - 0.5) * 20,  // spawn underneath the logo text
+                    y: cy + 90 + (Math.random() - 0.5) * 20,   // spawn slightly higher under the logo text
                     vx: (Math.random() - 0.5) * 50,           // slight horizontal drift
                     vy: -90 - Math.random() * 120,             // float up quickly
                     size: 25 + Math.random() * 35,             // larger size
