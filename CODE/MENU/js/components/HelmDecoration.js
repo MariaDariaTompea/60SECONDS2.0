@@ -18,9 +18,9 @@ export class HelmDecoration {
         this.boardX = (Game.WIDTH - this.boardW) / 2;
         this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.3); // hide bottom 30% off-screen
 
-        // Steering wheel dimensions — drawn as a perfect 1:1 square
-        // This squishes the horizontally-stretched wheel artwork back into a perfect circle!
-        this.wheelW = 320;                         // scaled up perfect circle
+        // Steering wheel dimensions — squeezed horizontally to correct the 5% wider oval artwork
+        // into a perfect circle on screen!
+        this.wheelW = 304;                         // 320 * (861 / 905)
         this.wheelH = 320;
         this.wheelCenterX = Game.WIDTH / 2;
         this.wheelCenterY = this.boardY + 10;      // positioned slightly higher for visibility
