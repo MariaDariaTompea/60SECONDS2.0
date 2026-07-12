@@ -12,20 +12,25 @@ import { Game } from '../Game.js';
 
 export class HelmDecoration {
     constructor() {
-        // Helm board dimensions — based on cropped, transparent image (1431x324)
-        this.boardOriginalW = 1431;
-        this.boardOriginalH = 324;
-        this.boardScale = 0.8;                     // proportional scale factor (slightly smaller)
+        // Helm board dimensions — matches high-resolution 1536x1024 canvas specifications
+        this.boardOriginalW = 1536;
+        this.boardOriginalH = 1024;
+        this.boardScale = 0.8;                     // proportional scale factor
 
-        this.boardW = this.boardOriginalW * this.boardScale; // 1287px wide
-        this.boardH = this.boardOriginalH * this.boardScale; // 291px tall
+        this.boardW = this.boardOriginalW * this.boardScale; // 1228.8px wide
+        this.boardH = this.boardOriginalH * this.boardScale; // 819.2px tall
         this.boardX = (Game.WIDTH - this.boardW) / 2;       // centered horizontally
-        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.3); // hide bottom 30% of the board off-screen
+        // Hide bottom 30% of the canvas off-screen to frame the wooden railing at the bottom
+        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.3); 
 
-        // Steering wheel — fixed in the center, adjusted vertically relative to the board
-        this.wheelSize = 240;
-        this.wheelCenterX = Game.WIDTH / 2;        // centered horizontally
-        this.wheelCenterY = this.boardY + 30;      // sits perfectly centered on the board's rope knot
+        // Normalized centroid coordinates for the steering wheel graphic inside the 1536x1024 canvas
+        this.centerX = 766.4 / 1536;
+        this.centerY = 480.7 / 1024;
+
+        // Position of the rotation center of the wheel on the screen
+        this.wheelCenterX = this.boardX + this.boardW * this.centerX;
+        this.wheelCenterY = this.boardY + this.boardH * this.centerY;
+        this.wheelSize = 240;                      // for placeholder size fallback
 
         // Wheel rotation
         this.wheelAngle = 0;                       // current angle in radians (driven by MenuScene)
@@ -64,20 +69,25 @@ export class HelmDecoration {
 
         ctx.save();
 
-        // Translate to wheel center, rotate, draw centered
-        ctx.translate(this.wheelCenterX, this.wheelCenterY);
-        ctx.rotate(this.wheelAngle);
-
         if (img) {
+            // Translate to the wheel's rotation center on screen
+            ctx.translate(this.wheelCenterX, this.wheelCenterY);
+            ctx.rotate(this.wheelAngle);
+
+            // Draw the full 1536x1024 sheet aligned
+            const rx = this.boardW * this.centerX;
+            const ry = this.boardH * this.centerY;
             ctx.drawImage(
                 img,
-                -this.wheelSize / 2,
-                -this.wheelSize / 2,
-                this.wheelSize,
-                this.wheelSize
+                -rx,
+                -ry,
+                this.boardW,
+                this.boardH
             );
         } else {
             // Placeholder: ship wheel shape
+            ctx.translate(this.wheelCenterX, this.wheelCenterY);
+            ctx.rotate(this.wheelAngle);
             this._drawPlaceholderWheel(ctx);
         }
 
