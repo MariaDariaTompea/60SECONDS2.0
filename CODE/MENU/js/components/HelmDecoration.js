@@ -20,7 +20,7 @@ export class HelmDecoration {
         this.boardW = this.boardOriginalW * this.boardScale; // 1287px wide
         this.boardH = this.boardOriginalH * this.boardScale; // 291px tall
         this.boardX = (Game.WIDTH - this.boardW) / 2;       // centered horizontally
-        this.boardY = Game.HEIGHT - this.boardH;            // sits at the bottom edge
+        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.3); // hide bottom 30% of the board off-screen
 
         // Steering wheel — fixed in the center, adjusted vertically relative to the board
         this.wheelSize = 240;
