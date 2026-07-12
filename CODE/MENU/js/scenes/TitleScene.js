@@ -35,6 +35,9 @@ export class TitleScene {
 
         // Transition state
         this.transitioning = false;
+
+        // Dynamic fire particles behind the logo
+        this.fireParticles = [];
     }
 
     /* ----------------------------------------------------------
@@ -78,6 +81,44 @@ export class TitleScene {
             this.subtitleAlpha = Math.min(1, subtitleTime / 1.0);
         }
 
+        // --- UPDATE FIRE PARTICLES ---
+        // Spawn fire particles once the title logo starts fading in
+        if (this.titleAlpha > 0.1) {
+            const spawnCount = 2 + Math.floor(Math.random() * 3); // 2-4 per frame
+            const cx = Game.WIDTH / 2;
+            const cy = Game.HEIGHT / 2 - 40; // center of logo
+
+            for (let i = 0; i < spawnCount; i++) {
+                this.fireParticles.push({
+                    x: cx + (Math.random() - 0.5) * 550,       // spread across logo width
+                    y: cy + (Math.random() - 0.2) * 80 + 30,   // spawn along bottom/sides
+                    vx: (Math.random() - 0.5) * 45,           // slight drift
+                    vy: -70 - Math.random() * 100,             // float up
+                    size: 12 + Math.random() * 24,             // size
+                    maxLife: 0.8 + Math.random() * 0.7,        // life duration
+                    life: 0.8 + Math.random() * 0.7,
+                    hue: 18 + Math.random() * 22,              // fire tones (hue 18-40 in HSL)
+                });
+            }
+        }
+
+        // Update active fire particles
+        for (let i = this.fireParticles.length - 1; i >= 0; i--) {
+            const p = this.fireParticles[i];
+            p.life -= dt;
+            if (p.life <= 0) {
+                this.fireParticles.splice(i, 1);
+                continue;
+            }
+
+            // Move
+            p.x += p.vx * dt;
+            p.y += p.vy * dt;
+
+            // Drift / wobble
+            p.vx += (Math.random() - 0.5) * 80 * dt;
+        }
+
         // Check for click to transition (can click anywhere at any time to skip)
         if (this.elapsedTime > 0.2 && this.input.mouseClicked && !this.transitioning) {
             this.transitioning = true;
@@ -102,6 +143,11 @@ export class TitleScene {
 
         // Vignette effect
         this._drawVignette(ctx, W, H);
+
+        // Fire particles behind the logo
+        if (this.titleAlpha > 0) {
+            this._drawFire(ctx);
+        }
 
         // Title text
         if (this.titleAlpha > 0) {
@@ -208,6 +254,35 @@ export class TitleScene {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('— Click to Continue —', W / 2, H / 2 + 160);
+
+        ctx.restore();
+    }
+
+    _drawFire(ctx) {
+        ctx.save();
+
+        // Additive blend mode for glowing flame physics
+        ctx.globalCompositeOperation = 'lighter';
+
+        for (const p of this.fireParticles) {
+            const lifeRatio = p.life / p.maxLife; // 1 (spawn) to 0 (death)
+            const alpha = lifeRatio * this.titleAlpha;
+            const size = p.size * (0.4 + 0.6 * lifeRatio); // shrink over time
+
+            // Radial gradient for smooth fireballs
+            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size);
+            const l = 50 + (1 - lifeRatio) * 30; // turns yellower/lighter as it rises
+
+            grad.addColorStop(0, `hsla(${p.hue}, 100%, ${l}%, ${alpha})`);
+            grad.addColorStop(0.3, `hsla(${p.hue - 12}, 100%, 50%, ${alpha * 0.6})`);
+            grad.addColorStop(0.8, `hsla(0, 100%, 30%, ${alpha * 0.15})`);
+            grad.addColorStop(1, `hsla(0, 100%, 0%, 0)`);
+
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+            ctx.fill();
+        }
 
         ctx.restore();
     }

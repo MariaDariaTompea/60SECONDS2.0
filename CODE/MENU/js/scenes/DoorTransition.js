@@ -182,12 +182,14 @@ export class DoorTransition {
         this._renderDoor(ctx, 'door_top', 0, this.topDoorY, this.doorW, this.doorH, true);
         this._renderDoor(ctx, 'door_bottom', 0, this.bottomDoorY, this.doorW, this.doorH, false);
 
-        // Seam glow when doors are close together
-        if (this.state === DoorState.CLOSING || this.state === DoorState.CLOSED) {
+        // Seam glow only when doors are almost closed (distance between them < 60px)
+        const doorDistance = this.bottomDoorY - (this.topDoorY + this.doorH);
+        if (doorDistance < 60 && (this.state === DoorState.CLOSING || this.state === DoorState.CLOSED)) {
             const seamY = (this.topDoorY + this.doorH + this.bottomDoorY) / 2;
+            const intensity = (1 - doorDistance / 60) * 0.25; // fade in as they meet
             const seamGrad = ctx.createLinearGradient(0, seamY - 20, 0, seamY + 20);
             seamGrad.addColorStop(0, 'rgba(255, 200, 80, 0)');
-            seamGrad.addColorStop(0.5, 'rgba(255, 200, 80, 0.15)');
+            seamGrad.addColorStop(0.5, `rgba(255, 200, 80, ${intensity})`);
             seamGrad.addColorStop(1, 'rgba(255, 200, 80, 0)');
             ctx.fillStyle = seamGrad;
             ctx.fillRect(0, seamY - 20, W, 40);
