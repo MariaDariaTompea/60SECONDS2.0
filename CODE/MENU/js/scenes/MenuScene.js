@@ -83,7 +83,7 @@ export class MenuScene {
         this.elapsedTime += dt;
         this.input.updateHoldTime(dt);
 
-        const maxScrollX = this.ocean.imageW - this.ocean.displayW;
+        const maxScrollX = Math.max(1, this.ocean.imageW - this.ocean.displayW);
 
         // Check if the user is dragging the background
         if (this.ocean.isDragging) {

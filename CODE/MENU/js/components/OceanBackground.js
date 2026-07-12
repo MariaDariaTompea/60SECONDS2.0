@@ -79,30 +79,36 @@ export class OceanBackground {
         ctx.clip();
 
         if (img) {
+            // Calculate scaled dimensions to preserve the original aspect ratio (no stretching!)
+            const scale = this.displayH / img.naturalHeight;
+            const renderW = img.naturalWidth * scale;
+
+            // Dynamically update imageW so that boundaries in MenuScene update match exactly
+            this.imageW = renderW;
+
             // Draw the ocean image, tiled to fill + scroll
             const sx = Math.floor(this.scrollX);
 
-            // We need to draw enough copies to fill the display area
             // Start drawing from an offset so the image wraps seamlessly
-            const startOffset = -(sx % this.imageW);
+            const startOffset = -(sx % renderW);
 
-            for (let x = startOffset; x < this.displayW; x += this.imageW) {
+            for (let x = startOffset; x < this.displayW; x += renderW) {
                 ctx.drawImage(
                     img,
                     this.displayX + x,
                     this.displayY,
-                    this.imageW,
+                    renderW,
                     this.displayH
                 );
             }
 
             // If startOffset is negative, we might need one more tile before
-            if (startOffset > -this.imageW + this.displayW) {
+            if (startOffset > -renderW + this.displayW) {
                 ctx.drawImage(
                     img,
-                    this.displayX + startOffset - this.imageW,
+                    this.displayX + startOffset - renderW,
                     this.displayY,
-                    this.imageW,
+                    renderW,
                     this.displayH
                 );
             }
