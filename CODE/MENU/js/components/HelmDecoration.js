@@ -20,10 +20,10 @@ export class HelmDecoration {
 
         // Steering wheel dimensions — squeezed horizontally to correct the 5% wider oval artwork
         // into a perfect circle on screen!
-        this.wheelW = 304;                         // 320 * (861 / 905)
-        this.wheelH = 320;
+        this.wheelW = 361;                         // 380 * (861 / 905) (scaled up)
+        this.wheelH = 380;
         this.wheelCenterX = Game.WIDTH / 2;
-        this.wheelCenterY = this.boardY + 10;      // positioned slightly higher for visibility
+        this.wheelCenterY = this.boardY + 30;      // moved slightly lower as requested
 
         // Wheel rotation
         this.wheelAngle = 0;                       // current angle in radians (driven by MenuScene)
