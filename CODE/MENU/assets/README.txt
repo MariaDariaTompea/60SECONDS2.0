@@ -9,11 +9,11 @@ Expected structure:
 
   assets/
   ├── menu_buttons/
-  │   ├── new_game.png      (900×190)
-  │   ├── load_game.png     (900×190)
-  │   ├── collection.png    (900×190)
-  │   ├── settings.png      (900×190)
-  │   └── exit.png          (900×190)
+  │   ├── new_game.png      (980×210)
+  │   ├── load_game.png     (980×210)
+  │   ├── collection.png    (980×210)
+  │   ├── settings.png      (980×210)
+  │   └── exit.png          (980×210)
   │
   ├── logo/
   │   └── logo.png          (520×260)

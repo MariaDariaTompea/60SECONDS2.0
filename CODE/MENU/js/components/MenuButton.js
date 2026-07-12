@@ -28,9 +28,9 @@ export class MenuButton {
         this.index = index;
         this.onClick = onClick;
 
-        // Button size — scaled up physically for better details and visibility
-        this.width = 450;
-        this.height = 95;
+        // Button size — scaled up slightly more for maximum detail and presence
+        this.width = 490;
+        this.height = 105;
 
         // Current animation offsets
         this.slideOffset = 0;   // horizontal slide on hover

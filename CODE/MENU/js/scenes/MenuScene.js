@@ -51,9 +51,9 @@ export class MenuScene {
 
         // Create the 5 menu buttons (matching the sketch layout)
         const startX = this.BORDER - 15;     // moved more to the left
-        const startY = 360;                   // moved lower down
-        const gap = 14;                       // vertical gap between buttons
-        const buttonH = 95;                   // matches MenuButton.height
+        const startY = 350;                   // moved lower down
+        const gap = 10;                       // vertical gap between buttons
+        const buttonH = 105;                  // matches MenuButton.height
 
         const buttonDefs = [
             { label: 'NEW GAME',    asset: 'btn_new_game',   action: () => this._onNewGame() },
