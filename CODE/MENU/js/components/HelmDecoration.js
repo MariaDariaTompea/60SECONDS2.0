@@ -20,8 +20,8 @@ export class HelmDecoration {
 
         // Steering wheel dimensions — drawn as a perfect 1:1 square
         // This squishes the horizontally-stretched wheel artwork back into a perfect circle!
-        this.wheelW = 240;                         // perfect circle scaling
-        this.wheelH = 240;
+        this.wheelW = 320;                         // scaled up perfect circle
+        this.wheelH = 320;
         this.wheelCenterX = Game.WIDTH / 2;
         this.wheelCenterY = this.boardY + 10;      // positioned slightly higher for visibility
 
