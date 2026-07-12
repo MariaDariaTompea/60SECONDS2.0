@@ -12,16 +12,20 @@ import { Game } from '../Game.js';
 
 export class HelmDecoration {
     constructor() {
-        // Helm board dimensions (from spec) — sits at the BOTTOM of the screen
-        this.boardW = Game.WIDTH;  // 1920
-        this.boardH = 180;
-        this.boardX = 0;
-        this.boardY = Game.HEIGHT - this.boardH;  // bottom edge
+        // Helm board dimensions — based on cropped, transparent image (1431x324)
+        this.boardOriginalW = 1431;
+        this.boardOriginalH = 324;
+        this.boardScale = 0.9;                     // proportional scale factor
 
-        // Steering wheel — fixed in the center of the board
+        this.boardW = this.boardOriginalW * this.boardScale; // 1287px wide
+        this.boardH = this.boardOriginalH * this.boardScale; // 291px tall
+        this.boardX = (Game.WIDTH - this.boardW) / 2;       // centered horizontally
+        this.boardY = Game.HEIGHT - this.boardH;            // sits at the bottom edge
+
+        // Steering wheel — fixed in the center, adjusted vertically relative to the board
         this.wheelSize = 240;
         this.wheelCenterX = Game.WIDTH / 2;        // centered horizontally
-        this.wheelCenterY = this.boardY - 20;      // sits on top of the board
+        this.wheelCenterY = this.boardY + 30;      // sits perfectly centered on the board's rope knot
 
         // Wheel rotation
         this.wheelAngle = 0;                       // current angle in radians (driven by MenuScene)

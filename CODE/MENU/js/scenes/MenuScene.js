@@ -51,8 +51,8 @@ export class MenuScene {
 
         // Create the 5 menu buttons (matching the sketch layout)
         const startX = this.BORDER + 30;     // left side, inside border
-        const startY = 340;                   // below the logo
-        const gap = 20;                       // vertical gap between buttons
+        const startY = 300;                   // below the logo
+        const gap = 14;                       // vertical gap between buttons
         const buttonH = 95;                   // matches MenuButton.height
 
         const buttonDefs = [
