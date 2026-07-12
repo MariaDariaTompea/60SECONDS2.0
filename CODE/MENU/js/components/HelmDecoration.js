@@ -12,32 +12,18 @@ import { Game } from '../Game.js';
 
 export class HelmDecoration {
     constructor() {
-        // Helm board dimensions — matches high-resolution 1536x1024 canvas specifications
-        this.boardOriginalW = 1536;
-        this.boardOriginalH = 1024;
-        
-        // We deliberately squish the board vertically (width scale 0.9, height scale 0.52)
-        // to make it look flatter, wider, and not elongated upwards.
-        this.boardW = this.boardOriginalW * 0.9;   // 1382.4px wide (spans screen nicely)
-        this.boardH = this.boardOriginalH * 0.52;  // 532.48px tall (flatter railing profile)
-        this.boardX = (Game.WIDTH - this.boardW) / 2;       // centered horizontally
-        // Hide bottom 38% of the board canvas off-screen
-        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.38); 
+        // Helm board dimensions — restored to previous compact size
+        this.boardW = 1145;                        // same size as before
+        this.boardH = 259;                         // same size as before
+        this.boardX = (Game.WIDTH - this.boardW) / 2;
+        this.boardY = Game.HEIGHT - this.boardH + (this.boardH * 0.3); // hide bottom 30% off-screen
 
-        // Normalized centroid coordinates for the steering wheel graphic inside the 1536x1024 canvas
-        this.centerX = 766.4 / 1536;
-        this.centerY = 480.7 / 1024;
-
-        // Position of the rotation center of the wheel on the screen (moved 90px higher)
+        // Steering wheel dimensions — drawn as a perfect 1:1 square
+        // This squishes the horizontally-stretched wheel artwork back into a perfect circle!
+        this.wheelW = 240;                         // perfect circle scaling
+        this.wheelH = 240;
         this.wheelCenterX = Game.WIDTH / 2;
-        this.wheelCenterY = this.boardY + this.boardH * this.centerY - 90;
-        
-        this.wheelSize = 240;                      // for placeholder size fallback
-        this.wheelScaleFactor = 0.42;              // compact, elegant wheel size (42% of original)
-
-        // Wheel dimensions (keeping perfect 1.5 aspect ratio so wheel stays circular)
-        this.wheelW = this.boardOriginalW * this.wheelScaleFactor;
-        this.wheelH = this.boardOriginalH * this.wheelScaleFactor;
+        this.wheelCenterY = this.boardY + 10;      // positioned slightly higher for visibility
 
         // Wheel rotation
         this.wheelAngle = 0;                       // current angle in radians (driven by MenuScene)
@@ -75,26 +61,19 @@ export class HelmDecoration {
         const img = AssetManager.get('helm_wheel');
 
         ctx.save();
+        ctx.translate(this.wheelCenterX, this.wheelCenterY);
+        ctx.rotate(this.wheelAngle);
 
         if (img) {
-            // Translate to the wheel's rotation center on screen
-            ctx.translate(this.wheelCenterX, this.wheelCenterY);
-            ctx.rotate(this.wheelAngle);
-
-            // Draw the full 1536x1024 sheet aligned using precalculated proportions
-            const rx = this.wheelW * this.centerX;
-            const ry = this.wheelH * this.centerY;
             ctx.drawImage(
                 img,
-                -rx,
-                -ry,
+                -this.wheelW / 2,
+                -this.wheelH / 2,
                 this.wheelW,
                 this.wheelH
             );
         } else {
             // Placeholder: ship wheel shape
-            ctx.translate(this.wheelCenterX, this.wheelCenterY);
-            ctx.rotate(this.wheelAngle);
             this._drawPlaceholderWheel(ctx);
         }
 
