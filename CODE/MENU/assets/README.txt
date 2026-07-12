@@ -16,7 +16,8 @@ Expected structure:
   │   └── exit.png          (980×210)
   │
   ├── logo/
-  │   └── logo.png          (520×260)
+  │   ├── logo_main.png     (650×325)
+  │   └── logo_loading.png  (800×400)
   │
   ├── ocean_loop/
   │   └── ocean_loop.png    (5472×984)

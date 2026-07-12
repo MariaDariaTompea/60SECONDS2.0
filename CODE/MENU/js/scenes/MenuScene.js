@@ -51,7 +51,7 @@ export class MenuScene {
 
         // Create the 5 menu buttons (matching the sketch layout)
         const startX = this.BORDER - 15;     // moved more to the left
-        const startY = 350;                   // moved lower down
+        const startY = 375;                   // moved lower down to match larger logo
         const gap = 10;                       // vertical gap between buttons
         const buttonH = 105;                  // matches MenuButton.height
 
@@ -232,16 +232,16 @@ export class MenuScene {
 
     _renderLogo(ctx) {
         const img = AssetManager.get('logo_main');
-        const logoX = this.BORDER + 30;
-        const logoY = this.BORDER + 20;
-        const logoW = 520;
-        const logoH = 260;
+        const logoX = this.BORDER - 20;     // overlaps left border
+        const logoY = this.BORDER - 10;     // overlaps top border
+        const logoW = 650;                  // scaled up
+        const logoH = 325;                  // aspect ratio preserved (2:1)
 
         if (img) {
             ctx.drawImage(img, logoX, logoY, logoW, logoH);
         } else {
             // Placeholder logo
-            AssetManager.drawPlaceholder(ctx, logoX, logoY, logoW, logoH, '#cc7700', 'LOGO (520×260)');
+            AssetManager.drawPlaceholder(ctx, logoX, logoY, logoW, logoH, '#cc7700', 'LOGO (650×325)');
 
             // Draw temp title in the placeholder
             ctx.save();

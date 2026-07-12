@@ -112,7 +112,8 @@ To replace the colored layouts with final graphics, save your PNGs into the foll
 
 | Component | Target File | Dimensions | Details |
 | :--- | :--- | :--- | :--- |
-| **Logo** | `assets/logo/logo.png` | 520 × 260 px | Game logo |
+| **Main Logo** | `assets/logo/logo_main.png` | 650 × 325 px | Main menu header (overlaps borders) |
+| **Loading Logo** | `assets/logo/logo_loading.png` | 800 × 400 px | Centered glowing splash screen logo |
 | **New Game Button** | `assets/menu_buttons/new_game.png` | **980 × 210 px** *(2x detail)* | Tentacle style button (renders at 490×105px) |
 | **Load Game Button** | `assets/menu_buttons/load_game.png` | **980 × 210 px** *(2x detail)* | Tentacle style button (renders at 490×105px) |
 | **Collection Button** | `assets/menu_buttons/collection.png` | **980 × 210 px** *(2x detail)* | Tentacle style button (renders at 490×105px) |
