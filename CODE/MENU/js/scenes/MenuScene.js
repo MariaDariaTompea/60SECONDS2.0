@@ -231,7 +231,7 @@ export class MenuScene {
        ---------------------------------------------------------- */
 
     _renderLogo(ctx) {
-        const img = AssetManager.get('logo');
+        const img = AssetManager.get('logo_main');
         const logoX = this.BORDER + 30;
         const logoY = this.BORDER + 20;
         const logoW = 520;

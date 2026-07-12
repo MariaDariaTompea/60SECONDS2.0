@@ -10,6 +10,7 @@
    ============================================================ */
 
 import { Game } from '../Game.js';
+import { AssetManager } from '../AssetManager.js';
 import { DoorTransition } from './DoorTransition.js';
 
 export class TitleScene {
@@ -164,21 +165,33 @@ export class TitleScene {
         ctx.save();
         ctx.globalAlpha = this.titleAlpha;
 
-        // Title glow
-        ctx.shadowColor = 'rgba(255, 180, 60, 0.6)';
-        ctx.shadowBlur = 40;
+        const img = AssetManager.get('logo_loading');
 
-        // Main title
-        ctx.fillStyle = '#f4c430'; // golden
-        ctx.font = 'bold 96px "Pirata One", Georgia, serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('60 SECONDS', W / 2, H / 2 - 30);
+        if (img) {
+            // Draw the high-quality loading logo centered
+            const logoW = 800;
+            const logoH = 400;
+            const logoX = (W - logoW) / 2;
+            const logoY = (H - logoH) / 2 - 40;
 
-        // Subtitle / version
-        ctx.font = 'bold 48px "Cinzel Decorative", Georgia, serif';
-        ctx.fillStyle = '#e0a020';
-        ctx.fillText('2.0', W / 2, H / 2 + 50);
+            ctx.drawImage(img, logoX, logoY, logoW, logoH);
+        } else {
+            // Fallback: Title text when image is not loaded
+            ctx.shadowColor = 'rgba(255, 180, 60, 0.6)';
+            ctx.shadowBlur = 40;
+
+            // Main title
+            ctx.fillStyle = '#f4c430'; // golden
+            ctx.font = 'bold 96px "Pirata One", Georgia, serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('60 SECONDS', W / 2, H / 2 - 30);
+
+            // Subtitle / version
+            ctx.font = 'bold 48px "Cinzel Decorative", Georgia, serif';
+            ctx.fillStyle = '#e0a020';
+            ctx.fillText('2.0', W / 2, H / 2 + 50);
+        }
 
         ctx.restore();
     }

@@ -28,7 +28,8 @@ export class AssetManager {
         'btn_exit':       'assets/menu_buttons/exit.png',
 
         // Logo
-        'logo':           'assets/logo/logo.png',
+        'logo_main':      'assets/logo/logo_main.png',
+        'logo_loading':   'assets/logo/logo_loading.png',
 
         // Ocean loop
         'ocean_loop':     'assets/ocean_loop/ocean_loop.png',
