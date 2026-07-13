@@ -41,6 +41,9 @@ export class AssetManager {
         // Doors
         'door_top':       'assets/door/door_top.png',
         'door_bottom':    'assets/door/door_bottom.png',
+
+        // Border Frame
+        'menu_border':    'assets/border/border.png',
     };
 
     /* ----------------------------------------------------------

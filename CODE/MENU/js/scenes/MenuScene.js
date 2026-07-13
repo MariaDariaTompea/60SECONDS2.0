@@ -167,62 +167,69 @@ export class MenuScene {
        ---------------------------------------------------------- */
 
     _renderBorder(ctx, W, H) {
-        const B = this.BORDER;
+        const img = AssetManager.get('menu_border');
 
-        // Outer edge of border
-        ctx.strokeStyle = '#2a5a2a';  // dark green (from sketch)
-        ctx.lineWidth = 4;
+        if (img) {
+            // Draw the high-quality digital art border frame over the entire screen
+            ctx.drawImage(img, 0, 0, W, H);
+        } else {
+            const B = this.BORDER;
 
-        // Draw the border as 4 rectangles (top, bottom, left, right)
-        // This leaves the interior open for the ocean
+            // Outer edge of border
+            ctx.strokeStyle = '#2a5a2a';  // dark green (from sketch)
+            ctx.lineWidth = 4;
 
-        // Top border bar
-        const topGrad = ctx.createLinearGradient(0, 0, 0, B);
-        topGrad.addColorStop(0, '#1a3a1a');
-        topGrad.addColorStop(0.5, '#2d5a2d');
-        topGrad.addColorStop(1, '#1a3a1a');
-        ctx.fillStyle = topGrad;
-        ctx.fillRect(0, 0, W, B);
+            // Draw the border as 4 rectangles (top, bottom, left, right)
+            // This leaves the interior open for the ocean
 
-        // Bottom border bar
-        ctx.fillRect(0, H - B, W, B);
+            // Top border bar
+            const topGrad = ctx.createLinearGradient(0, 0, 0, B);
+            topGrad.addColorStop(0, '#1a3a1a');
+            topGrad.addColorStop(0.5, '#2d5a2d');
+            topGrad.addColorStop(1, '#1a3a1a');
+            ctx.fillStyle = topGrad;
+            ctx.fillRect(0, 0, W, B);
 
-        // Left border bar
-        const sideGrad = ctx.createLinearGradient(0, 0, B, 0);
-        sideGrad.addColorStop(0, '#1a3a1a');
-        sideGrad.addColorStop(0.5, '#2d5a2d');
-        sideGrad.addColorStop(1, '#1a3a1a');
-        ctx.fillStyle = sideGrad;
-        ctx.fillRect(0, B, B, H - B * 2);
+            // Bottom border bar
+            ctx.fillRect(0, H - B, W, B);
 
-        // Right border bar
-        ctx.fillRect(W - B, B, B, H - B * 2);
+            // Left border bar
+            const sideGrad = ctx.createLinearGradient(0, 0, B, 0);
+            sideGrad.addColorStop(0, '#1a3a1a');
+            sideGrad.addColorStop(0.5, '#2d5a2d');
+            sideGrad.addColorStop(1, '#1a3a1a');
+            ctx.fillStyle = sideGrad;
+            ctx.fillRect(0, B, B, H - B * 2);
 
-        // Inner border line (gold/brass to contrast)
-        ctx.strokeStyle = 'rgba(180, 150, 80, 0.5)';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(B, B, W - B * 2, H - B * 2);
+            // Right border bar
+            ctx.fillRect(W - B, B, B, H - B * 2);
 
-        // Outer border line
-        ctx.strokeStyle = 'rgba(100, 160, 100, 0.6)';
-        ctx.lineWidth = 3;
-        ctx.strokeRect(2, 2, W - 4, H - 4);
-
-        // Corner accents (like rivets/bolts)
-        ctx.fillStyle = '#8a8a6a';
-        const corners = [
-            [B / 2, B / 2],
-            [W - B / 2, B / 2],
-            [B / 2, H - B / 2],
-            [W - B / 2, H - B / 2],
-        ];
-        for (const [cx, cy] of corners) {
-            ctx.beginPath();
-            ctx.arc(cx, cy, 8, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.strokeStyle = '#666';
+            // Inner border line (gold/brass to contrast)
+            ctx.strokeStyle = 'rgba(180, 150, 80, 0.5)';
             ctx.lineWidth = 2;
-            ctx.stroke();
+            ctx.strokeRect(B, B, W - B * 2, H - B * 2);
+
+            // Outer border line
+            ctx.strokeStyle = 'rgba(100, 160, 100, 0.6)';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(2, 2, W - 4, H - 4);
+
+            // Corner accents (like rivets/bolts)
+            ctx.fillStyle = '#8a8a6a';
+            const corners = [
+                [B / 2, B / 2],
+                [W - B / 2, B / 2],
+                [B / 2, H - B / 2],
+                [W - B / 2, H - B / 2],
+            ];
+            for (const [cx, cy] of corners) {
+                ctx.beginPath();
+                ctx.arc(cx, cy, 8, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = '#666';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
         }
     }
 
