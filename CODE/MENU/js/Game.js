@@ -9,6 +9,7 @@
    ============================================================ */
 
 import { InputManager } from './InputManager.js';
+import { TransitionManager } from './TransitionManager.js';
 
 export class Game {
     // Design resolution (matches our art specs)
@@ -25,6 +26,9 @@ export class Game {
 
         // Input system
         this.input = new InputManager(this.canvas);
+
+        // Transition system
+        this.transition = new TransitionManager(this);
 
         // Scene management
         this.currentScene = null;
@@ -53,6 +57,11 @@ export class Game {
         if (!this.running) {
             this._applySceneChange();
         }
+    }
+    
+    /** Trigger a scene transition with doors */
+    transitionTo(scene) {
+        this.transition.start(scene);
     }
 
     /** Internal: actually swap the scene */
@@ -110,6 +119,10 @@ export class Game {
         if (this.currentScene && this.currentScene.render) {
             this.currentScene.render(this.ctx);
         }
+
+        // TRANSITION phase (always on top)
+        this.transition.update(this.deltaTime);
+        this.transition.render(this.ctx);
 
         // End-of-frame input cleanup
         this.input.endFrame();

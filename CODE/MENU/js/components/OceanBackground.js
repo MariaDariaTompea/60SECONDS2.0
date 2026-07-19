@@ -39,12 +39,12 @@ export class OceanBackground {
        Update (called every frame, like Unity's Update)
        ---------------------------------------------------------- */
 
-    update(dt, input) {
+    update(dt, input, blockInput = false) {
         // Auto-scroll (disabled - handled by MenuScene / Helm sync)
         // this.scrollX += this.autoScrollSpeed * dt;
 
         // Handle drag to "look around"
-        if (input.mouseDown && input.isMouseOver(this.displayX, this.displayY, this.displayW, this.displayH)) {
+        if (!blockInput && input.mouseDown && input.isMouseOver(this.displayX, this.displayY, this.displayW, this.displayH)) {
             if (!this.isDragging) {
                 // Start dragging
                 this.isDragging = true;

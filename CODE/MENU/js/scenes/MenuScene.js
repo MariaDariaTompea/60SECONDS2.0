@@ -15,6 +15,8 @@ import { AssetManager } from '../AssetManager.js';
 import { OceanBackground } from '../components/OceanBackground.js';
 import { HelmDecoration } from '../components/HelmDecoration.js';
 import { MenuButton } from '../components/MenuButton.js';
+import { SettingsPanel } from '../components/SettingsPanel.js';
+import { CollectionScene } from './CollectionScene.js';
 
 export class MenuScene {
     constructor() {
@@ -30,6 +32,7 @@ export class MenuScene {
         this.helm = new HelmDecoration();
         this.buttons = [];
         this.logoImage = null; // loaded from AssetManager
+        this.settingsPanel = new SettingsPanel();
 
         // Elapsed time since scene started (for entrance animations)
         this.elapsedTime = 0;
@@ -83,12 +86,18 @@ export class MenuScene {
         this.elapsedTime += dt;
         this.input.updateHoldTime(dt);
 
+        // Determine if UI should block ocean interactions
+        let isInputBlocked = this.settingsPanel.active;
+        for (const btn of this.buttons) {
+            if (btn.isHovered) isInputBlocked = true;
+        }
+
         const maxScrollX = Math.max(1, this.ocean.imageW - this.ocean.displayW);
 
         // Check if the user is dragging the background
         if (this.ocean.isDragging) {
             // 1. DRAGGING MODE: Drag drives background scroll, which rotates the fixed wheel
-            this.ocean.update(dt, this.input);
+            this.ocean.update(dt, this.input, isInputBlocked);
 
             // Calculate interpolation percentage (0 to 1) based on current scroll position
             const t = this.ocean.scrollX / maxScrollX;
@@ -118,7 +127,7 @@ export class MenuScene {
             this.helm.wheelAngle = t * (Math.PI * 8);
 
             // Update ocean input detection to allow user to click and start dragging
-            this.ocean.update(dt, this.input);
+            this.ocean.update(dt, this.input, isInputBlocked);
         }
 
         // Store last mouse position for drag direction tracking
@@ -126,8 +135,14 @@ export class MenuScene {
 
         // Update menu buttons
         for (const btn of this.buttons) {
-            btn.update(dt, this.input, this.elapsedTime);
+            // Only update buttons if settings panel is NOT active
+            if (!this.settingsPanel.active) {
+                btn.update(dt, this.input, this.elapsedTime);
+            }
         }
+
+        // Update Settings Panel
+        this.settingsPanel.update(dt, this.input);
     }
 
     /* ----------------------------------------------------------
@@ -158,6 +173,9 @@ export class MenuScene {
 
         // 6. Helm decoration (on top of everything)
         this.helm.render(ctx);
+
+        // 7. Settings Panel (overlay, highest depth)
+        this.settingsPanel.render(ctx);
     }
 
     /* ----------------------------------------------------------
@@ -281,12 +299,12 @@ export class MenuScene {
 
     _onCollection() {
         console.log('[Menu] COLLECTION clicked');
-        // TODO: Open collection screen
+        this.game.transitionTo(new CollectionScene());
     }
 
     _onSettings() {
         console.log('[Menu] SETTINGS clicked');
-        // TODO: Open settings panel
+        this.settingsPanel.activate();
     }
 
     _onExit() {

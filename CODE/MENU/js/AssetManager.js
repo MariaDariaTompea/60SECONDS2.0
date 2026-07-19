@@ -44,6 +44,12 @@ export class AssetManager {
 
         // Border Frame
         'menu_border':    'assets/border/border.png',
+
+        // Settings
+        'settings_bg':    'assets/settings/MAPBACKGROUND.png',
+
+        // Collection
+        'collection_bg':  'assets/collection/ocean_loop2.png',
     };
 
     /* ----------------------------------------------------------

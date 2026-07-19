@@ -23,6 +23,9 @@ export class InputManager {
         this.scaleX = 1;
         this.scaleY = 1;
 
+        // Scroll state
+        this.mouseScrollDelta = 0;
+
         // --- Event listeners ---
 
         canvas.addEventListener('mousemove', (e) => {
@@ -75,6 +78,12 @@ export class InputManager {
             this.mouseDown = false;
             this.mouseReleased = true;
         });
+
+        // Mouse wheel support
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            this.mouseScrollDelta += e.deltaY;
+        }, { passive: false });
     }
 
     /** Called by Game.js when canvas is resized */
@@ -96,6 +105,7 @@ export class InputManager {
     endFrame() {
         this.mouseClicked = false;
         this.mouseReleased = false;
+        this.mouseScrollDelta = 0;
     }
 
     /* ----------------------------------------------------------
