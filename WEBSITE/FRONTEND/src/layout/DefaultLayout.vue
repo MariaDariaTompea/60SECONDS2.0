@@ -172,7 +172,10 @@
             <v-icon size="28" color="icon_color">mdi-steam</v-icon>
           </template>
           <template #title>
-            <h2 style="font-weight: normal; color: rgb(var(--v-theme-text_color))">
+            <h2
+              class="text-truncate"
+              style="font-weight: normal; color: rgb(var(--v-theme-text_color))"
+            >
               Steam belépés
             </h2>
           </template>
@@ -193,7 +196,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useDisplay, useTheme } from 'vuetify'
 import { useAuthStore } from '@/stores/auth'
 const authStore = useAuthStore()
@@ -214,6 +217,14 @@ const HandleChangeDarkmode = async () => {
   if (DarkmodeChange.value) theme.change('darkTheme')
   else theme.change('lightTheme')
 }
+
+watch(
+  isMobile,
+  (val) => {
+    drawerOpen.value = !val
+  },
+  { immediate: true },
+)
 
 function handleMouseEnter() {
   if (isMobile.value) return
