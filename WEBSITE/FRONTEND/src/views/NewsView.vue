@@ -1,37 +1,38 @@
 <template>
   <div class="news-view">
-    <div style="min-width: 450">
-      <v-text-field
-        v-model="search"
-        :loading="isLoading"
-        append-inner-icon="mdi-magnify"
-        density="compact"
-        label="Keresés"
-        variant="solo"
-        hide-details
-        single-line
-        clearable
-        bg-color="characters_panel"
-        base-color="characters_panel"
-        class="ma-2 position-absolute"
-        width="400"
-        style="right: 1em; top: 0"
-        @click:append-inner="triggerSearch"
-        @keyup.enter="triggerSearch"
-      />
-    </div>
+    <v-container class="pa-3" style="max-width: 900px">
+      <div class="d-flex align-center ga-2 mb-3">
+        <v-btn icon variant="text" elevation="0" @click="router.back()">
+          <v-icon color="icon_color">mdi-arrow-left</v-icon>
+        </v-btn>
 
-    <div class="back-button ma-2 position-absolute" style="left: 0; top: 0">
-      <v-btn icon @click="router.back()" elevation="0">
-        <v-icon color="icon_color">mdi-arrow-left</v-icon>
-      </v-btn>
-    </div>
+        <v-spacer />
 
-    <v-container style="max-width: 900px">
-      <h1 class="text-h4 mb-1" style="color: rgb(var(--v-theme-home_titles)); font-weight: 600">
+        <v-text-field
+          v-model="search"
+          :loading="isLoading"
+          append-inner-icon="mdi-magnify"
+          density="compact"
+          label="Keresés"
+          variant="solo"
+          hide-details
+          single-line
+          clearable
+          bg-color="characters_panel"
+          base-color="characters_panel"
+          class="news-search"
+          @click:append-inner="triggerSearch"
+          @keyup.enter="triggerSearch"
+        />
+      </div>
+
+      <h1
+        class="text-h5 text-sm-h4 mb-1"
+        style="color: rgb(var(--v-theme-home_titles)); font-weight: 600"
+      >
         Hírek
       </h1>
-      <p class="text-body-2 mb-6" style="opacity: 0.6">
+      <p class="text-body-2 mb-4 mb-sm-6" style="opacity: 0.6">
         A legfrissebb fejlesztések és bejelentések a 60 Seconds 2.0 világából.
       </p>
 
@@ -48,7 +49,7 @@
           elevation="0"
         >
           <v-expansion-panel-title class="news-title">
-            <div class="d-flex flex-column">
+            <div class="d-flex flex-column" style="min-width: 0">
               <span class="text-subtitle-1" style="font-weight: 500">{{ News.title }}</span>
               <span class="text-caption mt-1" style="opacity: 0.5">
                 {{ formatDate(News.createdAt, News.updatedAt) }}
@@ -81,15 +82,9 @@
                     <a
                       v-else-if="token.type === 'mention'"
                       class="mention-link"
-                      @click="
-                        router.push({
-                          name: 'details',
-                          params: { type: token.targetType, id: token.targetId },
-                        })
-                      "
+                      @click="openMention(token)"
+                      >{{ token.content }}</a
                     >
-                      {{ token.content }}
-                    </a>
                   </template>
                 </p>
                 <ul v-else-if="block.type === 'list'" class="mb-3 news-list">
@@ -117,61 +112,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed, watch } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useGetAllNews } from '@/api/news/newsQuery'
 import { useGetAllNames } from '@/api/characters/charactersQuery'
-
-let debounceTimer: ReturnType<typeof setTimeout>
-const search = ref('')
-const activeSearch = ref('')
-const router = useRouter()
-const route = useRoute()
-const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
-  useGetAllNews(activeSearch)
-const newsList = computed(() => {
-  return data.value?.pages.flatMap((page) => page.news) ?? []
-})
-const openPanel = ref()
-const loadMoreTrigger = ref<HTMLElement | null>(null)
-
-watch(search, (val) => {
-  clearTimeout(debounceTimer)
-  debounceTimer = setTimeout(() => {
-    activeSearch.value = val || ''
-  }, 500)
-})
-
-function triggerSearch() {
-  clearTimeout(debounceTimer)
-  activeSearch.value = search.value || ''
-}
-
-//const total = computed(() => data.value?.total ?? 0)
-
-onMounted(() => {
-  if (route.query.open) {
-    openPanel.value = Number(route.query.open)
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0]?.isIntersecting && hasNextPage.value && !isFetchingNextPage.value) {
-      fetchNextPage()
-    }
-  })
-
-  if (loadMoreTrigger.value) {
-    observer.observe(loadMoreTrigger.value)
-  }
-})
-
-onMounted(() => {
-  if (route.query.open) {
-    openPanel.value = Number(route.query.open)
-  }
-})
-
-const { data: names } = useGetAllNames()
 
 interface TextToken {
   type: 'text' | 'bold' | 'italic' | 'mention'
@@ -185,6 +129,68 @@ interface NameEntry {
   name: string
   mention: string
   type: string
+}
+
+let debounceTimer: ReturnType<typeof setTimeout>
+const search = ref('')
+const activeSearch = ref('')
+const router = useRouter()
+const route = useRoute()
+
+const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  useGetAllNews(activeSearch)
+
+const newsList = computed(() => {
+  return data.value?.pages.flatMap((page) => page.news) ?? []
+})
+
+const openPanel = ref<number | undefined>()
+const loadMoreTrigger = ref<HTMLElement | null>(null)
+let observer: IntersectionObserver | null = null
+
+watch(search, (val) => {
+  clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(() => {
+    activeSearch.value = val || ''
+  }, 500)
+})
+
+function triggerSearch() {
+  clearTimeout(debounceTimer)
+  activeSearch.value = search.value || ''
+}
+
+const { data: names } = useGetAllNames()
+
+onMounted(() => {
+  if (route.query.open) {
+    openPanel.value = Number(route.query.open)
+  }
+
+  observer = new IntersectionObserver((entries) => {
+    if (entries[0]?.isIntersecting && hasNextPage.value && !isFetchingNextPage.value) {
+      fetchNextPage()
+    }
+  })
+
+  if (loadMoreTrigger.value) {
+    observer.observe(loadMoreTrigger.value)
+  }
+})
+
+onUnmounted(() => {
+  clearTimeout(debounceTimer)
+  observer?.disconnect()
+  observer = null
+})
+
+function openMention(token: TextToken) {
+  if (!token.targetType || !token.targetId) return
+
+  router.push({
+    name: 'details',
+    params: { type: token.targetType, id: token.targetId },
+  })
 }
 
 function tokenizeParagraph(text: string, namesList: NameEntry[]): TextToken[] {
@@ -245,6 +251,12 @@ function formatDate(createdAt: string, updatedAt: string): string {
 </script>
 
 <style scoped>
+.news-search {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 400px;
+}
+
 .news-panel {
   background-color: rgb(var(--v-theme-characters_panel)) !important;
   border: 0.5px solid rgba(255, 182, 39, 0.15);
@@ -252,7 +264,7 @@ function formatDate(createdAt: string, updatedAt: string): string {
 }
 
 .news-panel :deep(.v-expansion-panel-title) {
-  padding: 16px 20px;
+  padding: 12px 14px;
 }
 
 .news-panel :deep(.v-expansion-panel-title--active) {
@@ -260,8 +272,6 @@ function formatDate(createdAt: string, updatedAt: string): string {
 }
 
 .news-content {
-  max-height: 400px;
-  overflow-y: auto;
   padding: 4px 4px 4px 0;
 }
 
@@ -277,19 +287,34 @@ function formatDate(createdAt: string, updatedAt: string): string {
 .news-list li::marker {
   color: rgb(var(--v-theme-icon_color));
 }
+
 .news-content::-webkit-scrollbar {
   width: 6px;
 }
+
 .news-content::-webkit-scrollbar-thumb {
   background-color: rgba(255, 182, 39, 0.3);
   border-radius: 3px;
 }
+
 .mention-link {
   color: rgb(var(--v-theme-icon_color));
   cursor: pointer;
   font-weight: 500;
 }
+
 .mention-link:hover {
   text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+  .news-panel :deep(.v-expansion-panel-title) {
+    padding: 16px 20px;
+  }
+
+  .news-content {
+    max-height: 400px;
+    overflow-y: auto;
+  }
 }
 </style>

@@ -12,6 +12,9 @@ const vuetify = createVuetify({
     ...components,
   },
   directives,
+  display: {
+    mobileBreakpoint: 'sm',
+  },
   icons: {
     defaultSet: 'mdi',
     aliases,

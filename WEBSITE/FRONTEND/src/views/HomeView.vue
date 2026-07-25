@@ -2,24 +2,35 @@
   <div class="home-view">
     <!-- HERO -->
     <v-card
-      class="hero pa-6 mb-4 rounded-xl"
+      class="hero pa-4 pa-sm-6 mb-4 rounded-xl"
       elevation="0"
       style="
         background-color: rgb(var(--v-theme-characters_panel));
         border-top: 3px solid rgb(var(--v-theme-icon_color));
       "
     >
-      <div class="d-flex align-center flex-column flex-md-row" style="gap: 1.5rem">
+      <div
+        class="d-flex align-center flex-column flex-sm-row text-center text-sm-left"
+        style="gap: 1.25rem"
+      >
         <div class="hero-logo d-flex align-center justify-center">
-          <v-icon size="48" color="primary">mdi-shield-home</v-icon>
+          <v-icon :size="isMobile ? 36 : 48" color="primary">mdi-shield-home</v-icon>
         </div>
         <div>
-          <h1 class="text-h4 mb-2">60 Seconds 2.0</h1>
-          <p class="mb-4" style="color: rgb(var(--v-theme-text_color)); opacity: 0.8">
+          <h1 class="text-h5 text-sm-h4 mb-2">Captian's Gamble</h1>
+          <p
+            class="text-body-2 text-sm-body-1 mb-4"
+            style="color: rgb(var(--v-theme-text_color)); opacity: 0.8"
+          >
             Túléld az atomcsapást a bunkeredben. Ismerd meg a családot, a tárgyakat és a döntéseket,
             amiken az életed múlik.
           </p>
-          <v-btn color="primary" href="https://store.steampowered.com" target="_blank">
+          <v-btn
+            color="primary"
+            :block="isMobile"
+            href="https://store.steampowered.com"
+            target="_blank"
+          >
             Steam
             <v-icon end>mdi-open-in-new</v-icon>
           </v-btn>
@@ -29,12 +40,14 @@
 
     <!-- HÍREK -->
     <div class="d-flex align-center ga-2">
-      <h2 class="text-h6" style="color: rgb(var(--v-theme-home_titles))">Hírek</h2>
-      <v-btn icon @click="router.push({ name: 'news' })" elevation="0">
-        <v-icon size="30">mdi-arrow-right-drop-circle-outline</v-icon>
+      <h2 class="text-subtitle-1 text-sm-h6" style="color: rgb(var(--v-theme-home_titles))">
+        Hírek
+      </h2>
+      <v-btn icon @click="router.push({ name: 'news' })" elevation="0" :size="isMobile ? 'small' : undefined">
+        <v-icon :size="isMobile ? 24 : 30">mdi-arrow-right-drop-circle-outline</v-icon>
       </v-btn>
     </div>
-    <v-row class="mb-4">
+    <v-row class="mb-4" :dense="isMobile">
       <template v-if="isLoading">
         <v-col v-for="n in 2" :key="n" cols="12" sm="6">
           <v-card
@@ -50,12 +63,12 @@
       <template v-else>
         <v-col v-for="news in News" :key="news.id" cols="12" sm="6">
           <v-card
-            class="pa-4 rounded-lg"
+            class="pa-3 pa-sm-4 rounded-lg"
             elevation="0"
             style="background-color: rgb(var(--v-theme-characters_panel)); cursor: pointer"
             @click="router.push({ name: 'news', query: { open: news.id } })"
           >
-            <div class="d-flex ga-2 align-center">
+            <div class="d-flex ga-2 align-baseline flex-wrap">
               <h3 class="text-subtitle-1">{{ news.title }}</h3>
               <h5 class="text-caption" style="opacity: 0.6; font-weight: normal">
                 {{ formatDate(news.createdAt, news.updatedAt) }}
@@ -68,11 +81,13 @@
     </v-row>
 
     <!-- KIEMELT -->
-    <h2 class="text-h6 mb-3" style="color: rgb(var(--v-theme-home_titles))">Kiemelt</h2>
-    <v-row>
+    <h2 class="text-subtitle-1 text-sm-h6 mb-3" style="color: rgb(var(--v-theme-home_titles))">
+      Kiemelt
+    </h2>
+    <v-row :dense="isMobile">
       <v-col cols="12" sm="6">
         <v-card
-          class="pa-4 rounded-lg d-flex align-center"
+          class="pa-3 pa-sm-4 rounded-lg d-flex align-center"
           elevation="0"
           style="
             background-color: rgb(var(--v-theme-characters_panel));
@@ -81,7 +96,7 @@
             cursor: pointer;
           "
         >
-          <v-avatar size="48" rounded="lg" color="surface">
+          <v-avatar :size="isMobile ? 40 : 48" rounded="lg" color="surface">
             <v-icon color="primary">mdi-account</v-icon>
           </v-avatar>
           <div>
@@ -98,7 +113,7 @@
 
       <v-col cols="12" sm="6">
         <v-card
-          class="pa-4 rounded-lg d-flex align-center"
+          class="pa-3 pa-sm-4 rounded-lg d-flex align-center"
           elevation="0"
           style="
             background-color: rgb(var(--v-theme-characters_panel));
@@ -107,7 +122,7 @@
             cursor: pointer;
           "
         >
-          <v-avatar size="48" rounded="lg" color="surface">
+          <v-avatar :size="isMobile ? 40 : 48" rounded="lg" color="surface">
             <v-icon color="primary">mdi-tools</v-icon>
           </v-avatar>
           <div>
@@ -126,10 +141,14 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useDisplay } from 'vuetify'
 import { useGetNews } from '@/api/news/newsQuery'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+const { mobile } = useDisplay()
+const isMobile = computed(() => mobile.value)
 
 const { data: News, isLoading } = useGetNews()
 
@@ -167,13 +186,25 @@ function formatDate(createdAt: string, updatedAt: string): string {
 
 <style scoped>
 .home-view {
-  padding: 1rem;
+  padding: 0.75rem;
 }
+
 .hero-logo {
-  width: 90px;
-  height: 90px;
+  width: 64px;
+  height: 64px;
   border-radius: 12px;
   background-color: rgb(var(--v-theme-icon_color));
   flex-shrink: 0;
+}
+
+@media (min-width: 600px) {
+  .home-view {
+    padding: 1rem;
+  }
+
+  .hero-logo {
+    width: 90px;
+    height: 90px;
+  }
 }
 </style>

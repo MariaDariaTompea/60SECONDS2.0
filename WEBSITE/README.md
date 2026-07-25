@@ -3,6 +3,8 @@
 The official wiki website for the game **60 Seconds 2.0**.
 It provides character and item entries, news, and a community section for fans of the game.
 
+🌐 **Live site:** [http://www.captiansgamble.com](http://www.captiansgamble.com)
+
 ## Tech Stack
 
 **Backend**
@@ -77,3 +79,26 @@ node api/uploadJsons/upload-news.js
 - **Search** — Debounced + enter-to-search filtering on characters, items, and news.
 - **Steam login** — Sign in with Steam; session kept via a secure httpOnly cookie.
 - **Community** *(in progress)* — Posts, comments, and likes/dislikes.
+
+## Deployment
+
+The site is live and publicly accessible at
+[http://www.captiansgamble.com](http://www.captiansgamble.com).
+
+**Setup**
+- **nginx** serves the production Vue build (`npm run build` → `dist/`) as static files.
+- API and auth requests are reverse-proxied to the Node backend:
+  - `/api/` → backend
+  - `/auth/` → backend (Steam OpenID flow)
+- SPA routing is handled with an nginx `try_files ... /index.html` fallback, so
+  client-side routes (e.g. `/community/1`) resolve correctly on direct access.
+- Steam authentication is host-agnostic: the passport `returnURL` / `realm` and the
+  post-login redirects are derived from the incoming request host, so the same build
+  works both in local development and on the live domain.
+
+**Current limitations**
+- **HTTP only** — HTTPS/SSL is intentionally postponed; the deployment currently serves
+  as a shared progress preview for the team.
+- The frontend `axios` baseURL is switched manually between the local development and
+  production variants in `src/lib/axios.ts`. Moving this to an environment variable
+  (`VITE_API_URL`) is a planned improvement.

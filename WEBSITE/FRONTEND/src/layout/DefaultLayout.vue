@@ -6,30 +6,44 @@
       d-flex
       style="background-color: rgb(var(--v-theme-nav))"
     >
-      <div class="pl-2">
-        <v-icon color="icon_color" size="45">mdi-car</v-icon>
-      </div>
-      <div style="width: 100%; position: absolute">
+      <div style="position: absolute; pointer-events: none; top:50%; left: 50%; transform: translate(-50%,-50%);" class="px-12">
         <v-app-bar-title class="text-center">
-          <h2>60 Seconds 2.0</h2>
+          <h2 v-if="!isMobile">Captian's Gamble</h2>
+          <span v-else class="text-subtitle-1 font-weight-bold">Captian's Gamble</span>
         </v-app-bar-title>
       </div>
-      <div style="right: 1em; position: absolute">
+
+      <div
+        class="d-flex align-center justify-space-between px-2"
+        :class="{ 'flex-row-reverse': isMobile }"
+        style="width: 100%"
+      >
+        <v-app-bar-nav-icon
+          v-if="isMobile"
+          color="icon_color"
+          @click="drawerOpen = !drawerOpen"
+        />
+        <v-icon v-else color="icon_color" size="45">mdi-car</v-icon>
+
         <v-btn icon @click="HandleChangeDarkmode()">
           <v-icon color="icon_color">{{
             DarkmodeChange ? 'mdi-weather-sunny' : 'mdi-weather-night'
-          }}</v-icon></v-btn
-        >
+          }}</v-icon>
+        </v-btn>
       </div>
     </v-app-bar>
+
     <v-navigation-drawer
+      v-model="drawerOpen"
+      :location="isMobile ? 'right' : 'left'"
       position-relative
-      permanent
-      :rail="rail"
+      :permanent="!isMobile"
+      :temporary="isMobile"
+      :rail="!isMobile && rail"
       border="0"
-      width="220"
+      :width="isMobile ? 260 : 220"
       rail-width="60"
-      @mouseenter="rail = false"
+      @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
       style="background-color: rgb(var(--v-theme-nav))"
     >
@@ -37,15 +51,15 @@
         density="compact"
         nav
         elevation="0"
-        class="mt-4 position-relative d-flex flex-column"
-        style="min-height: calc(100vh - 64px - 16px)"
+        class="pt-4 position-relative d-flex flex-column"
+        :style="{ minHeight: isMobile ? '100%' : 'calc(100vh - 64px)' }"
       >
         <v-list-item
           value="home"
           class="pl-2"
           :to="{ name: 'home' }"
           exact
-          @click="router.push({ name: 'home' })"
+          @click="handleNavClick"
         >
           <template #prepend>
             <v-icon size="28" color="icon_color">mdi-home</v-icon>
@@ -59,7 +73,7 @@
           value="characters"
           class="pl-2"
           :to="{ name: 'characters' }"
-          @click="router.push({ name: 'characters' })"
+          @click="handleNavClick"
         >
           <template #prepend>
             <v-icon size="28" color="icon_color">mdi-skull-crossbones</v-icon>
@@ -75,7 +89,7 @@
           value="items"
           class="pl-2"
           :to="{ name: 'items' }"
-          @click="router.push({ name: 'items' })"
+          @click="handleNavClick"
         >
           <template #prepend>
             <v-icon size="28" color="icon_color">mdi-liquor</v-icon>
@@ -91,7 +105,7 @@
           value="community"
           class="pl-2"
           :to="{ name: 'community' }"
-          @click="router.push({ name: 'community' })"
+          @click="handleNavClick"
         >
           <template #prepend>
             <v-icon size="28" color="icon_color">mdi-account-group</v-icon>
@@ -107,7 +121,7 @@
           value="about"
           class="pl-2"
           :to="{ name: 'about' }"
-          @click="router.push({ name: 'about' })"
+          @click="handleNavClick"
         >
           <template #prepend>
             <v-icon size="28" color="icon_color">mdi-earth</v-icon>
@@ -123,7 +137,11 @@
 
         <v-divider></v-divider>
 
-        <v-menu v-if="authStore.isLoggedIn" v-model="menuOpen" location="end">
+        <v-menu
+          v-if="authStore.isLoggedIn"
+          v-model="menuOpen"
+          :location="isMobile ? 'top' : 'end'"
+        >
           <template #activator="{ props }">
             <v-list-item v-bind="props" class="pl-2">
               <template #prepend>
@@ -163,7 +181,7 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-card class="content-card rounded-ts-xl">
+      <v-card :class="['content-card', { 'rounded-ts-xl': !isMobile }]" :rounded="isMobile ? '0' : undefined">
         <router-view v-slot="{ Component }" style="min-height: calc(100vh - 64px)">
           <v-fade-transition mode="out-in">
             <component :is="Component" />
@@ -175,8 +193,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { ref, computed, watch } from 'vue'
+import { ref, computed } from 'vue'
 import { useDisplay, useTheme } from 'vuetify'
 import { useAuthStore } from '@/stores/auth'
 const authStore = useAuthStore()
@@ -187,12 +204,9 @@ DarkmodeChange.value = true
 const rail = ref(true)
 const { mobile } = useDisplay()
 const isMobile = computed(() => mobile.value)
-/*watch(isMobile, async (newValue) => {
-  SettingsMenu.value = newValue;
-});*/
 const menuOpen = ref(false)
-const router = useRouter()
 const theme = useTheme()
+const drawerOpen = ref(false)
 theme.change('darkTheme')
 
 const HandleChangeDarkmode = async () => {
@@ -201,18 +215,30 @@ const HandleChangeDarkmode = async () => {
   else theme.change('lightTheme')
 }
 
+function handleMouseEnter() {
+  if (isMobile.value) return
+  rail.value = false
+}
+
+function handleMouseLeave() {
+  if (isMobile.value) return
+  if (!menuOpen.value) {
+    rail.value = true
+  }
+}
+
+function handleNavClick() {
+  if (isMobile.value) {
+    drawerOpen.value = false
+  }
+}
+
 function loginWithSteam() {
   window.location.href = `${window.location.protocol}//${window.location.hostname}:3000/auth/steam`
 }
 
 async function handleLogout() {
   await authStore.logout()
-}
-
-function handleMouseLeave() {
-  if (!menuOpen.value) {
-    rail.value = true
-  }
 }
 </script>
 
