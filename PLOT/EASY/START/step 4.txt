@@ -1,0 +1,9 @@
+Against all odds, we managed to set up a few tents on the shore. Solace Cay is a bright, sunny sanctuary, seemingly untouched by the horrors of the Sea Curse.
+
+To keep expanding our makeshift settlement, we need to send someone inland to scavenge for more materials and scout the terrain.
+
+Who should we send?
+
+[SELECT SURVIVOR]
+
+[SKIP FOR NOW] (This event will return later)

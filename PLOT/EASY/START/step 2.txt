@@ -1,0 +1,17 @@
+Great news! During the chaotic struggle at the docks, right before we pushed the boat into the dark waters, we managed to snag an old maritime map from a fallen soldier.
+
+According to its faded markings, an isolated island named Solace Cay lies just beyond these treacherous waters. From a distance, it appears pristine , untouched by the dark waters, as if the Sea Curse hasn't managed to take root there... at least, not yet. Aaa...mazing.
+
+Our supplies are running critically low, and sitting idle in this storm is a death sentence. Solace Cay might be our only chance to scavenge food, fresh water, and anything else that can keep us breathing.
+
+It looks like a safe haven, but we can't afford to lower our guard. We have no idea what or who might be waiting for us on those shores.
+
+Maybe we think this because we are starved. Yeah... that is a possibility. But it sounds like a good idea. Should we send someone for a few days to explore?
+
+YES/NO
+
+If "YES" (Choose to Scavenge):
+The risk paid off. Our scout searched Solace Cay and found the island completely abandoned—not a single creature, zombie, or monstrous threat in sight. It seems even the Sea Curse has its blind spots, and luck was finally on our side today. Our friend returned to the ship loaded with fresh supplies!
+
+If "NO" (Choose NOT to Scavenge-END OF PLOT):
+We decided to play it safe, but safety won't fill our stomachs. Food is completely gone, our throats are as dry as the desert, and hunger is making us lightheaded. Maybe fear is driving us mad, but the thought of stepping off this boat terrifies us. So we stay trapped in place, clinging to the ship while our time runs out.

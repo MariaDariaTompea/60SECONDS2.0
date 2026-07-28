@@ -1,0 +1,21 @@
+ENDING: A New Dawn on Solace Cay
+The waters finally settled, leaving behind a smooth, silent sea. Taking advantage of the calm, we hauled anchor and guided our ship safely into the shallow bay of Solace Cay.
+
+We made it. We actually escaped the cursed sea.
+
+We are starting over from scratch, with nothing but a few salvaged supplies and the tents we built. We miss our home terribly:the lives, the kingdom, and the people we left behind in The Tempestate , but this untainted island will do.
+
+Here, on these quiet shores, we will build a new sanctuary. This is our territory now.
+
+Summary of your Game’s Prologue / Early Act Loop:
+Intro: Fleeing the seaport during the outbreak of the Sea Curse; boarding the ship with minimal supplies.
+
+Step 2 (Scavenge Choice): Discovering the map leading to Solace Cay; deciding whether to risk landing.
+
+Step 3 (Tool Choice): Sending a scout with a Map, Gun, or Bare Hands to secure the beachhead.
+
+Step 4 (Survivor Choice): Selecting a crew member to expand the camp (or skipping until ready).
+
+Step 5 (Construction Complete): The small village/camp is built while the stormy sea calms down.
+
+Step 6 (Victory / Ending): Anchoring safely at Solace Cay and founding a new home.

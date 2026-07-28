@@ -1,0 +1,24 @@
+We’ve made several trips back and forth, scavenging what we can. The ship itself is trapped—the sea remains too violent for a vessel this size—so we have to rely on a small rowboat to send someone ashore.
+
+Since we can't leave anytime soon, we should build a small camp on Solace Cay to mark our territory and set up a base for future trips—a place to return to when the waters finally calm. Once the sea finds its peace, we might even be able to bring the ship closer to the island's shore.
+
+Who should we send, and what tool should they take with them to prepare the site?
+
+Option 1: Choose [MAP]
+Our friend spent a few days mapping out the uncharted inland areas and came back with fantastic news: this might actually work! They discovered a network of hidden caves packed with valuable supplies.
+
+Reward:
+
+If you do not have Gun Ammo: +1 Gun Ammo
+
+If you already have Gun Ammo: +3 Food
+
+Option 2: Choose [GUN]
+Our friend took the gun for protection, but nerves got the better of them. Hearing strange rustling in the dense trees, they panicked and started firing wildly into the brush. Turns out, it was just a group of small, harmless creatures. Feeling a bit guilty about the overkill, they brought the meat back anyway. We grilled it up and enjoyed an unexpected feast that night.
+
+Reward: +2 Food
+
+Option 3: Choose [EMPTY HAND / NOTHING]
+Our friend explored the immediate area on foot. While they confirmed that the campsite location is completely safe from danger, working with bare hands meant they couldn't harvest or build much. They had no choice but to return empty-handed.
+
+Reward: No resources gained.
